@@ -12,7 +12,7 @@ var port = process.env.PORT || 8080;
 
 //database
 //todo: connection failure
-mongoose.connect('mongodb://cmruser:h00dh3l3ns@ds029217.mongolab.com:29217/cascade');
+
 var Mountain = require('./app/models/mountain');
 
 //router
