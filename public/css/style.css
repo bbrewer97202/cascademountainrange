@@ -1,0 +1,18 @@
+
+.mountainListFilter ul {
+    
+}
+
+.mountainListFilter li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+.detailPhoto {
+    max-width: 30%;
+}
+
+.angular-google-map-container { 
+    width: 400px;
+    height: 400px; 
+}

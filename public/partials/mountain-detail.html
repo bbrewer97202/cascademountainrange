@@ -5,6 +5,10 @@
     <p>Elevation: {{mountain.elevation | number}} feet</p>
     <p>Last Eruption: {{mountain.eruption}}</p>
     
+    <img class="detailPhoto" src="{{detailImage(mountain.photos[0])}}" alt="">
+
+    <google-map center="map.center" zoom="map.zoom" refresh="true" draggable="true" options="map.options"></google-map>
+
 </div>
 
 <p><a href="/#mountains">All Mountains</a></p>

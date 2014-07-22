@@ -1,6 +1,7 @@
 var cmr = angular.module('cmr', [
     'ngResource', 
-    'ngRoute'
+    'ngRoute',
+    'google-maps'
 ]);
 
 cmr.config(['$routeProvider',

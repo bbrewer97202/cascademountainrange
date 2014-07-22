@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "angular-resource": "~1.2.20",
-    "angular-route": "~1.2.20"
+    "angular-route": "~1.2.20",
+    "angular-google-maps": "~1.1.8"
   }
 }

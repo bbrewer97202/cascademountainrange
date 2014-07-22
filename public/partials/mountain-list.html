@@ -1,6 +1,24 @@
 <h1>Mountain List</h1>
+
+
 <div class="mountainList">
-    <ul ng-repeat="mtn in mountains">
-        <li><a href="#/mountains/{{mtn._id}}">{{mtn.name}}</a></li>
+
+    <div class="mountainListFilter">
+        <ul>
+            <li><button ng-click="filterProp = 'name'">Name</button></li>
+            <li><button ng-click="filterProp = '-elevation'">Height</button></li>
+            <li><button ng-click="filterProp = ''">No Filters</button></li>
+        </ul>
+        <ul>
+            <li><button ng-click="filterLocation = { state: 'OR' }">Oregon</button></li>
+            <li><button ng-click="filterLocation = { state: 'WA' }">Washington</button></li>
+            <li><button ng-click="filterLocation = { state: 'CA' }">California</button></li>
+            <li><button ng-click="filterLocation = {}">All Locations</button></li>
+        </ul>
+    </div>
+
+    <!-- <ul ng-repeat="mtn in mountains | orderBy: 'name'"> -->
+    <ul ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp">
+        <li><a href="#/mountains/{{mtn._id}}">{{mtn.name}}</a> ({{mtn.elevation|number}} ft.)</li>
     </ul>
 </div>

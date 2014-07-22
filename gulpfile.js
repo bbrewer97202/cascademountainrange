@@ -8,7 +8,9 @@ gulp.task('scripts-vendor', function() {
     return gulp.src([
             './src/bower_components/angular/angular.min.js',
             './src/bower_components/angular-resource/angular-resource.min.js',
-            './src/bower_components/angular-route/angular-route.min.js'
+            './src/bower_components/angular-route/angular-route.min.js',
+            './src/bower_components/lodash/dist/lodash.underscore.min.js',
+            './src/bower_components/angular-google-maps/dist/angular-google-maps.min.js'
         ])
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('./public/js/'));
