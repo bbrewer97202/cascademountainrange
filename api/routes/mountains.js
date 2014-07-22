@@ -8,6 +8,14 @@ module.exports = function(app, Mountain) {
         next();
     });
 
+    //angular js partials
+    // router.route('/partials')
+    //     .get(function(res, req) {
+    //         var filename = req.params.filename;
+    //         if(!filename) return;  // might want to change this
+    //         res.render("partials/" + filename );
+    //     });
+
     router.route('/mountains')
         .post(function(req, res) {
             var mountain = new Mountain();

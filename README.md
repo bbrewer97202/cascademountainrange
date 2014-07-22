@@ -12,7 +12,6 @@ You'll need to create a config.json file in the project root with your mongo ins
 {
     "mongo": "[your mongo connect string]"
 }
-
 ```
 
 ### Start local server

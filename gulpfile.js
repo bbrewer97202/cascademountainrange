@@ -7,7 +7,8 @@ var uglify = require('gulp-uglify');
 gulp.task('scripts-vendor', function() {
     return gulp.src([
             './src/bower_components/angular/angular.min.js',
-            './src/bower_components/angular-resource/angular-resource.min.js'
+            './src/bower_components/angular-resource/angular-resource.min.js',
+            './src/bower_components/angular-route/angular-route.min.js'
         ])
         .pipe(concat('vendor.js'))
         .pipe(gulp.dest('./public/js/'));
@@ -26,4 +27,5 @@ gulp.task('watch', function() {
     gulp.watch('./src/js/**/*.js', ['scripts']);
 });
 
+//default task
 gulp.task('default', ['scripts-vendor', 'scripts', 'watch']);
