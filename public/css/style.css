@@ -2,7 +2,7 @@ html, body {
     font-family: sans-serif;
     font-size: 16px;
     margin: 0;
-    background-color: #e4dacd;
+    background-color: #c3baa5;/* #e4dacd */;
 }
 
 .contents {
@@ -22,12 +22,13 @@ html, body {
  * header
  ******************************************************************************/
 header {
-/*    border-radius: 5px 5px 0px 0px;
-    -moz-border-radius: 5px 5px 0px 0px;
-    -webkit-border-radius: 5px 5px 0px 0px;    */
-    background-color: #58291a;    
+    -webkit-box-shadow: 0 3px 6px -1px rgba(36,36,33,0.40);
+    -moz-box-shadow: 0 3px 6px -1px rgba(36,36,33,0.40);
+    box-shadow: 0 3px 6px -1px rgba(36,36,33,0.40);
+    background-color: #6d5536;    
 }
 header h1 {
+    font-family: 'Questrial', sans-serif;
     color: #e6dc4b;
     font-weight: normal; 
     padding: 0.6em;   
@@ -93,6 +94,7 @@ header h1 {
 
 .mountainListLinks thead {
     background-color: #7d936c;
+    width: 100%;
 }
 
 .mountainListLinks th,
@@ -104,8 +106,8 @@ header h1 {
 }
 
 .mountainListLinks th {
-    padding-bottom: 0.625em;
     cursor: pointer;
+    font-size: 100%;
 }
 
 .mountainListLinks th:hover {
@@ -121,7 +123,7 @@ header h1 {
  ******************************************************************************/
 .cmrPhoto {
     width: 30%;
-    border: solid 4px #58291a;
+    border: solid 4px #6d5536;
     margin: 0 0 20px 0;
 }
 
@@ -134,7 +136,7 @@ header h1 {
 .cmrPhoto-credit {
     padding: 0.3em;
     color: #e6dc4b;
-    background-color: #58291a;
+    background-color: #6d5536; /* #58291a; */
 }
 
 .cmrPhoto-credit {
@@ -144,6 +146,14 @@ header h1 {
 /*******************************************************************************
  * mountain detail
  ******************************************************************************/
+.mountainDetailMap {
+    padding: 20px;
+} 
+.mountainDetailMap h2 {
+    font-family: 'Questrial', sans-serif;
+    font-weight: normal;
+}
+
 .mountainDetailMap .angular-google-map-container { 
     width: 400px;
     height: 400px; 
