@@ -1,10 +1,63 @@
 html, body {
     font-family: sans-serif;
     font-size: 16px;
+    margin: 0;
+    background-color: #e4dacd;
 }
 
-.mountainListFilter ul {
-    
+.contents {
+    margin: 0 auto;
+    width: 92%;
+    max-width: 950px;    
+    background-color: #c8b693;
+    border-radius: 0px 0px 5px 5px;
+    -moz-border-radius: 0px 0px 5px 5px;
+    -webkit-border-radius: 0px 0px 5px 5px;
+    -webkit-box-shadow: 3px 3px 6px -1px rgba(36,36,33,0.20), -3px 3px 6px -1px rgba(36,36,33,0.20);    
+    -moz-box-shadow: 3px 3px 6px -1px rgba(36,36,33,0.20), -3px 3px 6px -1px rgba(36,36,33,0.20);    
+    box-shadow: 3px 3px 6px -1px rgba(36,36,33,0.20), -3px 3px 6px -1px rgba(36,36,33,0.20);    
+}
+
+/*******************************************************************************
+ * header
+ ******************************************************************************/
+header {
+/*    border-radius: 5px 5px 0px 0px;
+    -moz-border-radius: 5px 5px 0px 0px;
+    -webkit-border-radius: 5px 5px 0px 0px;    */
+    background-color: #58291a;    
+}
+header h1 {
+    color: #e6dc4b;
+    font-weight: normal; 
+    padding: 0.6em;   
+    margin: 0;
+}
+
+/*******************************************************************************
+ * mountain list
+ ******************************************************************************/
+.mountainList {
+    overflow: hidden;
+    padding: 15px;
+}
+
+.mountainList a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.mountainListMap,
+.mountainListLinks {    
+    width: 48%;    
+}
+
+.mountainListMap {
+    float: left;
+}
+
+.mountainListLinks {
+    float: right;
 }
 
 .mountainListFilter li {
@@ -12,6 +65,60 @@ html, body {
     list-style-type: none;
 }
 
+.mountainListMap .angular-google-map-container { 
+    /*width: 200px;*/
+    height: 600px; 
+}
+
+.mountainListMap,
+.mountainListLinks {
+    border: solid 2px #7d936c;    
+    background-color: #dbdeb7; 
+    border-radius: 5px 5px 5px 5px;
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;        
+}
+
+.mountainListLinks {
+    padding-bottom: 3px;
+}
+
+.mountainListLinks table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #dbdeb7;    
+    padding: 0.2em;
+
+}
+
+.mountainListLinks thead {
+    background-color: #7d936c;
+}
+
+.mountainListLinks th,
+.mountainListLinks td {
+    padding: 0.3em 0.625em;
+    vertical-align: top;
+    font-size: 80%;
+    text-align: left;
+}
+
+.mountainListLinks th {
+    padding-bottom: 0.625em;
+    cursor: pointer;
+}
+
+.mountainListLinks th:hover {
+    text-decoration: underline
+}
+
+.mountainListLinks a {
+    color: #333;
+}
+
+/*******************************************************************************
+ * CMR PHOTO
+ ******************************************************************************/
 .cmrPhoto {
     width: 30%;
     border: solid 4px #58291a;
@@ -34,7 +141,10 @@ html, body {
     font-size: 80%;
 }
 
-.angular-google-map-container { 
+/*******************************************************************************
+ * mountain detail
+ ******************************************************************************/
+.mountainDetailMap .angular-google-map-container { 
     width: 400px;
     height: 400px; 
 }

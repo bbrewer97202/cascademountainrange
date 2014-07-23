@@ -1,24 +1,42 @@
-<h1>Mountain List</h1>
-
-
 <div class="mountainList">
 
-    <div class="mountainListFilter">
-        <ul>
-            <li><button ng-click="filterProp = 'name'">Name</button></li>
-            <li><button ng-click="filterProp = '-elevation'">Height</button></li>
-            <li><button ng-click="filterProp = ''">No Filters</button></li>
-        </ul>
+    <p>The cascade mountain range is a series of mountains that extend from southern British Columbia through <a ng-click="filterLocation = { state: 'WA' }">Washington</a> and <a ng-click="filterLocation = { state: 'OR' }">Oregon</a> into <a ng-click="filterLocation = { state: 'CA' }">Northern California</a>.<p>
+
+    <div class="mountainListMap" ng-controller="MountainListMapController">
+        <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" events="map.events">
+            <markers>
+                <marker ng-repeat="marker in markers" coords="marker.coords" events="markerEvents" options="marker.options"></marker>
+            </markers>
+        </google-map>
+    </div>
+
+    <div class="mountainListLinks">
+        <table>
+            <thead>
+                <tr>
+                    <th ng-click="filterProp = 'name'">Name</th>
+                    <th ng-click="filterProp = 'state'">Location</th>
+                    <th ng-click="filterProp = '-elevation'">Elevation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp">
+                    <td><a href="#/mountains/{{mtn._id}}">{{mtn.name}}</a></td>
+                    <td>{{mtn.state}}</td>
+                    <td>{{mtn.elevation|number}} ft.</td>
+                </tr>
+            </tbody>
+        <table>
+    </div>
+
+<!--     <div class="mountainListFilter">
         <ul>
             <li><button ng-click="filterLocation = { state: 'OR' }">Oregon</button></li>
             <li><button ng-click="filterLocation = { state: 'WA' }">Washington</button></li>
             <li><button ng-click="filterLocation = { state: 'CA' }">California</button></li>
             <li><button ng-click="filterLocation = {}">All Locations</button></li>
         </ul>
-    </div>
+    </div> -->
 
-    <!-- <ul ng-repeat="mtn in mountains | orderBy: 'name'"> -->
-    <ul ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp">
-        <li><a href="#/mountains/{{mtn._id}}">{{mtn.name}}</a> ({{mtn.elevation|number}} ft.)</li>
-    </ul>
 </div>
+
