@@ -18,7 +18,12 @@ gulp.task('scripts-vendor', function() {
 
 //source javascript
 gulp.task('scripts', function() {
-    return gulp.src(['./src/js/*.js', './src/js/controllers/*.js', './src/js/services/*.js'])
+    return gulp.src([
+        './src/js/*.js', 
+        './src/js/controllers/*.js', 
+        './src/js/services/*.js',
+        './src/js/directives/*.js',
+        ])
         .pipe(concat('script.js'))
         // .pipe(uglify())
         .pipe(gulp.dest('./public/js/'));

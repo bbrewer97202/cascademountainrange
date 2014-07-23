@@ -24,6 +24,10 @@ cmr.config(['$routeProvider',
 
 cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountain', function($scope, $routeParams, Mountain) {
 
+    $scope.mountain = {
+        photos: []
+    }
+
     //TODO error handling on ID
     Mountain.get({ id: $routeParams.id }, function(data) {
         $scope.mountain = data;
@@ -38,6 +42,8 @@ cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountain'
             }
         }
         
+        // console.log("second: ", $scope.mountain.photos[0].caption);
+
     });
 
     //default map
@@ -49,12 +55,6 @@ cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountain'
         },
         zoom: 11
     };
-
-    $scope.detailImage = function(image) {
-
-        //TODO: move S3 path to rootscope or app config?
-        return 'https://s3-us-west-2.amazonaws.com/cascademountainrange/' + image;
-    }
 
     //TODO: handle Canada
     //TODO: make service or filter
@@ -95,3 +95,35 @@ cmr.controller('MountainListController', ['$scope', 'Mountain', function($scope,
 cmr.factory('Mountain', function($resource) {
     return $resource('/api/mountains/:id');
 });
+
+cmr.directive('cmrPhoto', function() {
+
+    return {
+        restrict: 'A',
+        scope: {
+            photo: '=photo'
+        },
+        replace: 'true',
+        link: function(scope, element, attrs) {
+
+            scope.PATH = 'https://s3-us-west-2.amazonaws.com/cascademountainrange/';
+
+            //default values are empty
+            scope.image = null;
+            scope.caption = null;
+            scope.credit = null;
+
+            //photo atttribute comes in async so not populated when directive loads, but updated later
+            scope.$watch('photo', function(newVal) {
+                if (newVal) {                     
+                    scope.image = scope.PATH + newVal.photo;
+                    scope.caption = newVal.caption;
+                    scope.credit = newVal.credit;
+                }
+            }, true);
+        },
+        templateUrl: 'partials/directives/cmrPhoto.html'
+    } 
+});
+
+

@@ -1,5 +1,9 @@
 cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountain', function($scope, $routeParams, Mountain) {
 
+    $scope.mountain = {
+        photos: []
+    }
+
     //TODO error handling on ID
     Mountain.get({ id: $routeParams.id }, function(data) {
         $scope.mountain = data;
@@ -14,6 +18,8 @@ cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountain'
             }
         }
         
+        // console.log("second: ", $scope.mountain.photos[0].caption);
+
     });
 
     //default map
@@ -25,12 +31,6 @@ cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountain'
         },
         zoom: 11
     };
-
-    $scope.detailImage = function(image) {
-
-        //TODO: move S3 path to rootscope or app config?
-        return 'https://s3-us-west-2.amazonaws.com/cascademountainrange/' + image;
-    }
 
     //TODO: handle Canada
     //TODO: make service or filter

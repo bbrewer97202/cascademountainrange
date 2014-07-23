@@ -4,8 +4,11 @@
     <p>Location: {{stateFormat()}}</p>
     <p>Elevation: {{mountain.elevation | number}} feet</p>
     <p>Last Eruption: {{mountain.eruption}}</p>
-    
-    <img class="detailPhoto" src="{{detailImage(mountain.photos[0])}}" alt="">
+
+    <div cmr-photo photo="mountain.photos[0]"></div>
+    <div cmr-photo photo="mountain.photos[1]"></div>
+    <div cmr-photo photo="mountain.photos[2]"></div>
+    <div cmr-photo photo="mountain.photos[3]"></div>
 
     <google-map center="map.center" zoom="map.zoom" refresh="true" draggable="true" options="map.options"></google-map>
 
