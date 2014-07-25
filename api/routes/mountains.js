@@ -3,10 +3,10 @@ var router = express.Router();
 
 module.exports = function(app, Mountain) {
 
-    router.use(function(req, res, next) {
-        console.log("something is happening");
-        next();
-    });
+    // router.use(function(req, res, next) {
+    //     console.log("something is happening");
+    //     next();
+    // });
 
     //angular js partials
     // router.route('/partials')

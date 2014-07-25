@@ -1,5 +1,10 @@
 cmr.controller('MountainListMapController', ['$scope', '$location', 'Mountain', function($scope, $location, Mountain) {
 
+    //TODO: move to controller?
+    var DEFAULT_LAT = 45.14353713591516;
+    var DEFAULT_LON = -121.955078125;
+    var DEFAULT_ZOOM = 6;
+
     $scope.markers = [];
     $scope.markerCoords = [];
     $scope.markerOptions = [];
@@ -7,41 +12,69 @@ cmr.controller('MountainListMapController', ['$scope', '$location', 'Mountain', 
 
     $scope.map = {
         center: {
-            latitude: 45.14353713591516,
-            longitude: -121.955078125
+            latitude: DEFAULT_LAT,
+            longitude: DEFAULT_LON
         },
-        zoom: 6,
+        zoom: DEFAULT_ZOOM,
         options: {
             mapTypeId: google.maps.MapTypeId.TERRAIN,
-            streetViewControl: false
+            streetViewControl: false,
+            disableDefaultUI: true
         },
         events: {
             dragend: function() {
                 console.log("drag end", $scope.map);
                 window.ben = $scope.map;
             }
-        }    
+        },
+        label: null 
     };
 
     $scope.markerEvents = {
         click: markerClick,       
-        // mouseover: markerMouseOver,
-        // mouseout: markerMouseOut
+        mouseover: markerMouseOver,
+        mouseout: markerMouseOut
     };
+
+    //watch for mountainlist focus events
+    $scope.$on('mountainListFocus', function(e, name) {
+
+        //set map center to coords for specified mountain
+        $scope.map.center = {
+            latitude: $scope.nameTitleMap[name].lat,
+            longitude: $scope.nameTitleMap[name].lon
+        }
+        $scope.map.zoom = 8;
+    });
+
+    $scope.$on('mountainListBlur', function(e, name) {
+
+        //set map center to coords to default view
+        $scope.map.center = {
+            latitude: DEFAULT_LAT,
+            longitude: DEFAULT_LON
+        }
+        $scope.map.zoom = DEFAULT_ZOOM;
+    });    
+
     function markerClick(marker, e) {
         
         //get the mountain title, map that to internal ID, and redirect page
-        var id = $scope.nameTitleMap[marker.getTitle()];
+        var id = $scope.nameTitleMap[marker.getTitle()]._id;
         $location.path('/mountains/' + id);
         $scope.$apply();
 
     }
-    // function markerMouseOver(marker, e) {
-    //     console.log("on marker over");
-    // }
-    // function markerMouseOut(marker, e) {
-    //     console.log("on marker out");
-    // }
+
+    function markerMouseOver(marker, e) {
+        $scope.map.label = $scope.nameTitleMap[marker.getTitle()].name;
+        $scope.$apply();
+    }
+
+    function markerMouseOut(marker, e) {
+        $scope.map.label = null;
+        $scope.$apply();
+    }
 
     Mountain.query(function(data) {
 
@@ -66,8 +99,8 @@ cmr.controller('MountainListMapController', ['$scope', '$location', 'Mountain', 
                     }
                 }); 
 
-                //update dictionary of titles to mountain ids              
-                $scope.nameTitleMap[$scope.mountains[n].name] = $scope.mountains[n]._id;
+                //update dictionary of titles to mountains              
+                $scope.nameTitleMap[$scope.mountains[n].name] = $scope.mountains[n];
             }
         }
 

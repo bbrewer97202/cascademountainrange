@@ -1,17 +1,21 @@
 <div class="mountainList">
 
-    <p>The cascade mountain range is a series of mountains that extend from southern British Columbia through <a ng-click="filterLocation = { state: 'WA' }">Washington</a> and <a ng-click="filterLocation = { state: 'OR' }">Oregon</a> into <a ng-click="filterLocation = { state: 'CA' }">Northern California</a>.<p>
+    <p>The cascade mountain range extends from British Columbia through <a ng-click="filterLocation = { state: 'WA' }">Washington</a> and <a ng-click="filterLocation = { state: 'OR' }">Oregon</a> into <a ng-click="filterLocation = { state: 'CA' }">Northern California</a>.<p>
 
     <div class="mountainListMap" ng-controller="MountainListMapController">
         <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" events="map.events">
             <markers>
-                <marker ng-repeat="marker in markers" coords="marker.coords" events="markerEvents" options="marker.options"></marker>
+                <marker ng-repeat="marker in markers" coords="marker.coords" events="markerEvents" options="marker.options">
+                    <!-- <marker-label content="marker.name" anchor="-8 30"></marker-label> -->
+                </marker>
             </markers>
         </google-map>
+        <div class="mountainListMapLabel" ng-show="map.label">{{map.label}}</div>
     </div>
+    
 
     <div class="mountainListLinks">
-        <table>
+        <table ng-mouseleave="mountainBlur()">
             <thead>
                 <tr>
                     <th ng-click="filterProp = 'name'">Name</th>
@@ -20,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp">
+                <tr ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp" ng-mouseover="mountainFocus(mtn.name)">
                     <td><a href="#/mountains/{{mtn._id}}">{{mtn.name}}</a></td>
                     <td>{{mtn.state}}</td>
                     <td>{{mtn.elevation|number}} ft.</td>

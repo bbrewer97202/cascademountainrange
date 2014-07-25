@@ -53,10 +53,6 @@ header h1 {
     width: 48%;    
 }
 
-.mountainListMap {
-    float: left;
-}
-
 .mountainListLinks {
     float: right;
 }
@@ -89,12 +85,16 @@ header h1 {
     border-collapse: collapse;
     background-color: #dbdeb7;    
     padding: 0.2em;
-
 }
 
 .mountainListLinks thead {
     background-color: #7d936c;
+    border-bottom: solid 1px #666;
     width: 100%;
+}
+
+.mountainListLinks tr:hover {
+    background-color: rgba(125,147,108,0.2);
 }
 
 .mountainListLinks th,
@@ -116,6 +116,27 @@ header h1 {
 
 .mountainListLinks a {
     color: #333;
+}
+
+/*******************************************************************************
+ * mountain list map
+ ******************************************************************************/
+.mountainListMap {
+    float: left;
+    position: relative;
+}
+
+.mountainListMapLabel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(125,147,108,0.9);
+    color: #e6dc4b;
+    text-align: center;
+    font-family: 'Questrial', sans-serif;
+    font-size: 120%;
+    padding: 0.8em;
 }
 
 /*******************************************************************************

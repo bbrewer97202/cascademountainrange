@@ -17,9 +17,6 @@ cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountain'
                 mapTypeId: google.maps.MapTypeId.TERRAIN 
             }
         }
-        
-        // console.log("second: ", $scope.mountain.photos[0].caption);
-
     });
 
     //default map
