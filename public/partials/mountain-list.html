@@ -2,17 +2,16 @@
 
     <p>The cascade mountain range extends from British Columbia through <a ng-click="filterLocation = { state: 'WA' }">Washington</a> and <a ng-click="filterLocation = { state: 'OR' }">Oregon</a> into <a ng-click="filterLocation = { state: 'CA' }">Northern California</a>.<p>
 
-    <div class="mountainListMap" ng-controller="MountainListMapController">
+    <div class="mountainListMap" ng-controller="MountainListMapController" ng-mousemove="mapMouseMove($event)">
         <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" events="map.events">
             <markers>
-                <marker ng-repeat="marker in markers" coords="marker.coords" events="markerEvents" options="marker.options">
-                    <!-- <marker-label content="marker.name" anchor="-8 30"></marker-label> -->
-                </marker>
+                <marker ng-repeat="marker in markers" coords="marker.coords" events="markerEvents" options="marker.options"></marker>
             </markers>
         </google-map>
-        <div class="mountainListMapLabel" ng-show="map.label">{{map.label}}</div>
+        <!-- <div class="mountainListMapLabel" ng-show="map.label">{{map.label}}</div> -->
+        <div class="mountainListMapLabel" ng-class="{'active': map.label.title}">{{map.label.title}}</div>
     </div>
-    
+
 
     <div class="mountainListLinks">
         <table ng-mouseleave="mountainBlur()">
@@ -33,4 +32,3 @@
         <table>
     </div>
 </div>
-

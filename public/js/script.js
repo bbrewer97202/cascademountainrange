@@ -123,7 +123,8 @@ cmr.controller('MountainListMapController', ['$scope', '$location', 'Mountain', 
         options: {
             mapTypeId: google.maps.MapTypeId.TERRAIN,
             streetViewControl: false,
-            disableDefaultUI: true
+            disableDefaultUI: true,
+            scrollwheel: false
         },
         events: {
             dragend: function() {
@@ -131,11 +132,15 @@ cmr.controller('MountainListMapController', ['$scope', '$location', 'Mountain', 
                 window.ben = $scope.map;
             }
         },
-        label: null 
+        label: {
+            title: null,
+            x: 0,
+            y: 0
+        }
     };
 
     $scope.markerEvents = {
-        click: markerClick,       
+        click: markerClick,
         mouseover: markerMouseOver,
         mouseout: markerMouseOut
     };
@@ -159,10 +164,10 @@ cmr.controller('MountainListMapController', ['$scope', '$location', 'Mountain', 
             longitude: DEFAULT_LON
         }
         $scope.map.zoom = DEFAULT_ZOOM;
-    });    
+    });
 
     function markerClick(marker, e) {
-        
+
         //get the mountain title, map that to internal ID, and redirect page
         var id = $scope.nameTitleMap[marker.getTitle()]._id;
         $location.path('/mountains/' + id);
@@ -170,15 +175,93 @@ cmr.controller('MountainListMapController', ['$scope', '$location', 'Mountain', 
 
     }
 
-    function markerMouseOver(marker, e) {
-        $scope.map.label = $scope.nameTitleMap[marker.getTitle()].name;
+    function markerMouseOver(marker, e, f) {
+        $scope.map.label.title = $scope.nameTitleMap[marker.getTitle()].name;
         $scope.$apply();
     }
 
     function markerMouseOut(marker, e) {
-        $scope.map.label = null;
+        $scope.map.label.title = null;
         $scope.$apply();
     }
+
+   //TODO:
+   //from: http://www.angularjshub.com/examples/eventhandlers/mouseevents/
+    // Accepts a MouseEvent as input and returns the x and y
+    // coordinates relative to the target element.
+    var getCrossBrowserElementCoords = function (mouseEvent)
+    {
+      var result = {
+        x: 0,
+        y: 0
+      };
+
+      if (!mouseEvent)
+      {
+        mouseEvent = window.event;
+      }
+
+      if (mouseEvent.pageX || mouseEvent.pageY)
+      {
+        result.x = mouseEvent.pageX;
+        result.y = mouseEvent.pageY;
+      }
+      else if (mouseEvent.clientX || mouseEvent.clientY)
+      {
+        result.x = mouseEvent.clientX + document.body.scrollLeft +
+          document.documentElement.scrollLeft;
+        result.y = mouseEvent.clientY + document.body.scrollTop +
+          document.documentElement.scrollTop;
+      }
+
+      if (mouseEvent.target)
+      {
+        var offEl = mouseEvent.target;
+        var offX = 0;
+        var offY = 0;
+
+        if (typeof(offEl.offsetParent) != "undefined")
+        {
+          while (offEl)
+          {
+            offX += offEl.offsetLeft;
+            offY += offEl.offsetTop;
+
+            offEl = offEl.offsetParent;
+          }
+        }
+        else
+        {
+          offX = offEl.x;
+          offY = offEl.y;
+        }
+
+        result.x -= offX;
+        result.y -= offY;
+      }
+
+      return result;
+    };
+
+    function mapMouseMove(e) {
+
+        // var mouseX = 0, mouseY = 0;
+        //
+        // if (e.offsetX === null) {
+        //     mouseX = e.originalEvent.layerX;
+        //     mouseY = e.originalEvent.layerY;
+        // } else {
+        //     mouseX = e.offsetX;
+        //     mouseY = e.offsetY;
+        // }
+        //
+        // console.log("mapMouseMove", mouseX, mouseY);
+        var coords = getCrossBrowserElementCoords(e)
+        console.log(coords.x, coords.y);
+    }
+
+    //TODO: structure
+    $scope.mapMouseMove = mapMouseMove;
 
     Mountain.query(function(data) {
 
@@ -201,9 +284,9 @@ cmr.controller('MountainListMapController', ['$scope', '$location', 'Mountain', 
                             url: '/images/map-marker-icon.png'
                         }
                     }
-                }); 
+                });
 
-                //update dictionary of titles to mountains              
+                //update dictionary of titles to mountains
                 $scope.nameTitleMap[$scope.mountains[n].name] = $scope.mountains[n];
             }
         }
