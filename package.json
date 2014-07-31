@@ -12,7 +12,7 @@
     "gulp-concat": "~2.3.3"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "setup": "bower install",
     "start": "node server.js"
   }
 }
