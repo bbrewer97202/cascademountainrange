@@ -8,15 +8,16 @@ var mongoose = require('mongoose');
 
 //configuration not stored in source control
 var config = require('./config.json');
+var mongoConnect = process.env.MONGO_CONNECT || config.mongo;
 
 //configure middleware
 app.use(bodyParser());
 
-var port = process.env.PORT || 8080;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 //database
 //todo: connection failure
-mongoose.connect(config.mongo);
+mongoose.connect(mongoConnect);
 var Mountain = require('./api/models/mountain');
 
 //router
