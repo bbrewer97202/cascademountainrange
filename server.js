@@ -7,8 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 //configuration not stored in source control
-var config = require('./config.json');
-var mongoConnect = process.env.MONGO_CONNECT || config.mongo;
+var mongoConnect = process.env.MONGO_CONNECT || require('./config.json').mongo;
 
 //configure middleware
 app.use(bodyParser());
