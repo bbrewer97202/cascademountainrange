@@ -1,3 +1,3 @@
-cmr.factory('Mountain', function($resource) {
+cmr.factory('Mountain', ['$resource', function($resource) {
     return $resource('/api/mountains/:id');
-});
+}]);

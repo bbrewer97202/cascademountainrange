@@ -2,14 +2,32 @@
 
     <p>The cascade mountain range extends from British Columbia through <a ng-click="filterLocation = { state: 'WA' }">Washington</a> and <a ng-click="filterLocation = { state: 'OR' }">Oregon</a> into <a ng-click="filterLocation = { state: 'CA' }">Northern California</a>.<p>
 
-    <div class="mountainListMap" ng-controller="MountainListMapController" ng-mousemove="mapMouseMove($event)">
-        <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" events="map.events">
+    <!-- <div class="mountainListMap" ng-controller="MountainListMapController" ng-mousemove="mapMouseMove($event)"> -->
+<!--         <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" events="map.events">
             <markers>
                 <marker ng-repeat="marker in markers" coords="marker.coords" events="markerEvents" options="marker.options"></marker>
             </markers>
-        </google-map>
+        </google-map> -->
         <!-- <div class="mountainListMapLabel" ng-show="map.label">{{map.label}}</div> -->
-        <div class="mountainListMapLabel" ng-class="{'active': map.label.title}">{{map.label.title}}</div>
+        <!-- <div class="mountainListMapLabel" ng-class="{'active': map.label.title}">{{map.label.title}}</div> -->
+    <!-- </div> -->
+
+    <div class="mountainListMap" ng-controller="MountainListMapController">
+        <ui-gmap-google-map 
+            center="map.center"
+            zoom="map.zoom"
+            dragging="map.dragging"
+            bounds="map.bounds"
+            events="map.events"
+            options="map.options"
+            pan="true"
+            control="map.control">
+            <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" events="markerevents">
+                <ui-gmap-windows show="'show'" coords="'self'" options="windowOptions">
+                    <div ng-non-bindable>{{title}}</div>
+                </ui-gmap-windows>
+            </ui-gmap-markers>       
+        </ui-gmap-google-map>
     </div>
 
 
