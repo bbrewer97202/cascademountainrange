@@ -2,16 +2,6 @@
 
     <p>The cascade mountain range extends from British Columbia through <a ng-click="filterLocation = { state: 'WA' }">Washington</a> and <a ng-click="filterLocation = { state: 'OR' }">Oregon</a> into <a ng-click="filterLocation = { state: 'CA' }">Northern California</a>.<p>
 
-    <!-- <div class="mountainListMap" ng-controller="MountainListMapController" ng-mousemove="mapMouseMove($event)"> -->
-<!--         <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" events="map.events">
-            <markers>
-                <marker ng-repeat="marker in markers" coords="marker.coords" events="markerEvents" options="marker.options"></marker>
-            </markers>
-        </google-map> -->
-        <!-- <div class="mountainListMapLabel" ng-show="map.label">{{map.label}}</div> -->
-        <!-- <div class="mountainListMapLabel" ng-class="{'active': map.label.title}">{{map.label.title}}</div> -->
-    <!-- </div> -->
-
     <div class="mountainListMap" ng-controller="MountainListMapController">
         <ui-gmap-google-map 
             center="map.center"
@@ -22,14 +12,13 @@
             options="map.options"
             pan="true"
             control="map.control">
-            <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" events="markerevents">
-                <ui-gmap-windows show="'show'" coords="'self'" options="windowOptions">
+            <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" events="markerEvents">
+                <ui-gmap-windows show="'show'" coords="'self'" options="'options'">
                     <div ng-non-bindable>{{title}}</div>
                 </ui-gmap-windows>
             </ui-gmap-markers>       
         </ui-gmap-google-map>
     </div>
-
 
     <div class="mountainListLinks">
         <table ng-mouseleave="mountainBlur()">
@@ -41,8 +30,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp" ng-mouseover="mountainFocus(mtn.name)">
-                    <td><a href="#/mountains/{{mtn._id}}">{{mtn.name}}</a></td>
+                <tr ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp" ng-mouseover="mountainFocus(mtn.id)">
+                    <td><a href="#/mountains/{{mtn.id}}">{{mtn.name}}</a></td>
                     <td>{{mtn.state}}</td>
                     <td>{{mtn.elevation|number}} ft.</td>
                 </tr>

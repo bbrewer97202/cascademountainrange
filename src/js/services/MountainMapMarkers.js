@@ -1,4 +1,4 @@
-cmr.factory('MountainMapMarkers', ['Mountain', '$http', '$q', function(Mountain, $http, $q) {
+cmr.factory('MountainMapMarkers', ['Mountains', '$http', function(Mountains, $http) {
 
 	/**
 	 * given response from api, return marker list data for map consumption
@@ -14,12 +14,15 @@ cmr.factory('MountainMapMarkers', ['Mountain', '$http', '$q', function(Mountain,
 			var mountain = data[mtn];
 			if ((mountain.hasOwnProperty('lat')) && (mountain.hasOwnProperty('lon'))) {
 				markerData.push({
-					id: "marker" + count,
+					id: mountain.id,
 					latitude: mountain.lat,
 					longitude: mountain.lon,
 					title: mountain.name,
 					show: false,
-					icon: '/images/map-marker-icon.png'
+					icon: '/images/map-marker-icon.png',
+					options: {
+						boxClass:"mountain-marker-window",
+					}					
 				});
 			}
 			count++;
@@ -30,37 +33,26 @@ cmr.factory('MountainMapMarkers', ['Mountain', '$http', '$q', function(Mountain,
 
 	/**
 	 * get list of mountain markers for map
-	 * TODO: there should only be one call to mountains (Mountain factory), ever
 	 * @return {object} return an object with a "data" key
 	 */
 	function get() {
-
-		return $http.get('/api/mountains/')
-			.then(function(response) {
-				console.log("response, ", response);
-				return {
-					data: createMarkerData(response.data)
-				}
-			}, function(error) {
-				throw error.status + " : " + error.data;
-			});
-	}	
+		return Mountains.get(function(response) {
+			return {
+				data: createMarkerData(response)
+			}
+		});		
+	}
 
 	// function get() {
 
-	// 	var deferred = $q.defer();
-
-	// 	$http.get('/api/mountains/')
-	// 		.success(function(data) {
-	// 			deferred.resolve({
-	// 				data: createMarkerData(data)
-	// 			});
-	// 		})
-	// 		.error(function(msg, code) {
-	// 			deferred.reject(msg);
+	// 	return $http.get('/api/mountains/')
+	// 		.then(function(response) {
+	// 			return {
+	// 				data: createMarkerData(response.data)
+	// 			}
+	// 		}, function(error) {
+	// 			throw error.status + " : " + error.data;
 	// 		});
-
-	// 	return deferred.promise;
 	// }
 
 	/*

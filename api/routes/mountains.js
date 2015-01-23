@@ -41,11 +41,12 @@ module.exports = function(app, Mountain) {
 
     router.route('/mountains/:mountain_id')
         .get(function(req, res) {
-            Mountain.findById(req.params.mountain_id, function(err, mountain) {
+            
+            Mountain.find({ id: req.params.mountain_id }, function(err, mountain) {
                 if (err) {
                     res.send(err);
                 }
-                res.json(mountain);
+                res.json(mountain[0]);
             });
         });
         // .put(function(req, res) {

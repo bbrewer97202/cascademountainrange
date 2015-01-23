@@ -1,13 +1,13 @@
-cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountain', function($scope, $rootScope, Mountain) {
+cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', function($scope, $rootScope, Mountains) {
 
     $scope.focusLocation = "";
     $scope.filterProps = {};
     $scope.filterLocation = {};
 
-    $scope.mountainFocus = function(name) {    
-        if (name !== $scope.focusLocation) {            
-            $rootScope.$broadcast('mountainListFocus', name);
-            $scope.focusLocation = name;
+    $scope.mountainFocus = function(id) {    
+        if (id !== $scope.focusLocation) {            
+            $rootScope.$broadcast('mountainListFocus', id);
+            $scope.focusLocation = id;
         }
     }
 
@@ -16,7 +16,7 @@ cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountain', fu
         $scope.focusLocation = "";
     }
 
-    Mountain.query(function(data) {
+    Mountains.get(function(data) {
         $scope.mountains = data;
     });
 

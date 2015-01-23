@@ -1,11 +1,14 @@
-cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountain', function($scope, $routeParams, Mountain) {
+cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountains', function($scope, $routeParams, Mountains) {
 
     $scope.mountain = {
         photos: []
     }
 
-    //TODO error handling on ID
-    Mountain.get({ id: $routeParams.id }, function(data) {
+    //TODO: error handling on ID
+    Mountains.getMountainById($routeParams.id).then(function(data) {
+
+        console.log("got mountain " + $routeParams.id + ": ", data);
+
         $scope.mountain = data;
         $scope.map = {
             center: {
