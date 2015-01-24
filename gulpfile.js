@@ -1,7 +1,20 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
+var gulp = require('gulp'),
+    concat = require('gulp-concat'),
+    compass = require('gulp-compass'),
+    uglify = require('gulp-uglify');
 
+gulp.task('compass', function() {
+    return gulp.src('./src/sass/*.scss')
+        .pipe(compass({
+            css: './public/css',
+            sass: './src/sass',
+            require: ['susy']
+        }))
+        .on('error', function() {
+            console.log("sass error TODO");
+        })
+        .pipe(gulp.dest('./public/css'));
+});
 
 //minified vendor javascript
 gulp.task('scripts-vendor', function() {
@@ -32,7 +45,8 @@ gulp.task('scripts', function() {
 //watch
 gulp.task('watch', function() {
     gulp.watch('./src/js/**/*.js', ['scripts']);
+    gulp.watch('./src/sass/**/*.scss', ['compass']);
 });
 
 //default task
-gulp.task('default', ['scripts-vendor', 'scripts', 'watch']);
+gulp.task('default', ['scripts-vendor', 'scripts', 'compass', 'watch']);

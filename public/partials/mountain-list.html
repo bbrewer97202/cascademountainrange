@@ -1,7 +1,5 @@
 <div class="mountainList">
 
-    <p>The cascade mountain range extends from British Columbia through <a ng-click="filterLocation = { state: 'WA' }">Washington</a> and <a ng-click="filterLocation = { state: 'OR' }">Oregon</a> into <a ng-click="filterLocation = { state: 'CA' }">Northern California</a>.<p>
-
     <div class="mountainListMap" ng-controller="MountainListMapController">
         <ui-gmap-google-map 
             center="map.center"
@@ -21,18 +19,23 @@
     </div>
 
     <div class="mountainListLinks">
-        <table ng-mouseleave="mountainBlur()">
-            <thead>
+
+        <p>The cascade mountain range extends from <a ng-click="geoBoundaryChange('BC')">British Columbia</a> through <a ng-click="geoBoundaryChange('WA')">Washington</a> and <a ng-click="geoBoundaryChange('OR')">Oregon</a> into <a ng-click="geoBoundaryChange('CA')">Northern California</a>.<p>
+
+        <table ng-mouseleave="mountainBlur()" class="mountainListTable">
+            <thead class="{{filterType}}">
                 <tr>
-                    <th ng-click="filterProp = 'name'">Name</th>
-                    <th ng-click="filterProp = 'state'">Location</th>
-                    <th ng-click="filterProp = '-elevation'">Elevation</th>
+                    <th data-filter-type="name" ng-click="setFilter('name')" ng-class="{'reverse': filterReverse}">Name</th>
+                    <th data-filter-type="state" ng-click="setFilter('state')" ng-class="{'reverse': filterReverse}">Location</th>
+                    <th data-filter-type="lat" ng-click="setFilter('lat')" ng-class="{'reverse': filterReverse}">Latitude</th>
+                    <th data-filter-type="elevation" ng-click="setFilter('elevation')" ng-class="{'reverse': filterReverse}">Elevation</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp" ng-mouseover="mountainFocus(mtn.id)">
                     <td><a href="#/mountains/{{mtn.id}}">{{mtn.name}}</a></td>
                     <td>{{mtn.state}}</td>
+                    <td>{{mtn.lat}}</td>
                     <td>{{mtn.elevation|number}} ft.</td>
                 </tr>
             </tbody>

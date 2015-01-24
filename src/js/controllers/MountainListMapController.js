@@ -31,6 +31,9 @@ cmr.controller('MountainListMapController',
             $scope.googleVersion = maps.version;
             maps.visualRefresh = true;
 
+            //debug
+            $scope.geocoder = new google.maps.Geocoder();
+
             $scope.map = {
                 center: {
                     latitude: DEFAULT_LAT,
@@ -41,8 +44,18 @@ cmr.controller('MountainListMapController',
                     mapTypeId: google.maps.MapTypeId.TERRAIN,
                     streetViewControl: false,
                     disableDefaultUI: true,
-                    scrollwheel: false
-                }
+                    scrollwheel: false,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                       style: google.maps.ZoomControlStyle.SMALL
+                    }                    
+                },
+                events: {                
+                    dragend: function() {
+                        //TODO: this is only for debugging
+                        console.log("drag end", $scope.map);
+                    }
+                }     
             };
         });
     });    
@@ -62,6 +75,46 @@ cmr.controller('MountainListMapController',
 
     $scope.$on('mountainListBlur', function(e) {
         markerUnfocus($scope.markerFocusedById);
+    });
+
+    $scope.$on('geoTargetChange', function(e, id) {
+
+        //TODO: clean up and move to service
+
+        var lat = DEFAULT_LAT;
+        var lon = DEFAULT_LON;
+        var zoom = DEFAULT_ZOOM;
+
+        switch (id) {
+            case 'OR':
+                lat = 44.06414336303867;
+                lon = -121.88916015625;
+                zoom = 7;
+                break;
+            case 'WA':
+                lat = 47.38369696135246;
+                lon = -121.1640625;
+                zoom = 7;
+                break; 
+            case 'CA':
+                lat = 39.793490785895294;
+                lon = -121.39048385620117;
+                zoom = 7;
+                break; 
+            case 'BC':
+                lat = 50.82002641688227;
+                lon = -120.900390625;
+                zoom = 7;
+                break;                 
+            default: 
+        }
+
+        $scope.map.center = {
+            latitude: lat,
+            longitude: lon
+        };
+        $scope.map.zoom = zoom;
+
     });
 
     /**
@@ -99,90 +152,5 @@ cmr.controller('MountainListMapController',
     }
 
 }]);
-
-
-
-// cmr.controller('MountainListMapController', ['$scope', '$location', 'Mountain', 'uiGmapGoogleMapApi', function($scope, $location, Mountain, GoogleMapApi) {
-
-//     //TODO: move to service
-//     var DEFAULT_LAT = 45.14353713591516;
-//     var DEFAULT_LON = -121.955078125;
-//     var DEFAULT_ZOOM = 6;
-
-//     $scope.markers = [];
-//     $scope.markerCoords = [];
-//     $scope.markerOptions = [];
-//     $scope.nameTitleMap = {};
-
-//     $scope.map = {
-//         center: {
-//             latitude: DEFAULT_LAT,
-//             longitude: DEFAULT_LON
-//         },
-//         zoom: DEFAULT_ZOOM,
-//         options: {
-//             mapTypeId: google.maps.MapTypeId.TERRAIN,
-//             streetViewControl: false,
-//             disableDefaultUI: true,
-//             scrollwheel: false
-//         },
-//         events: {
-//             dragend: function() {
-//                 console.log("drag end", $scope.map);
-//                 window.ben = $scope.map;
-//             }
-//         },
-//         label: {
-//             title: null,
-//             x: 0,
-//             y: 0
-//         }
-//     };
-
-//     $scope.markerEvents = {
-//         click: markerClick,
-//         mouseover: markerMouseOver,
-//         mouseout: markerMouseOut
-//     };
-
-//     //watch for mountainlist focus events
-//     $scope.$on('mountainListFocus', function(e, name) {
-
-//         //set map center to coords for specified mountain
-//         $scope.map.center = {
-//             latitude: $scope.nameTitleMap[name].lat,
-//             longitude: $scope.nameTitleMap[name].lon
-//         }
-//         $scope.map.zoom = 8;
-//     });
-
-//     $scope.$on('mountainListBlur', function(e, name) {
-
-//         //set map center to coords to default view
-//         $scope.map.center = {
-//             latitude: DEFAULT_LAT,
-//             longitude: DEFAULT_LON
-//         }
-//         $scope.map.zoom = DEFAULT_ZOOM;
-//     });
-
-//     function markerClick(marker, e) {
-
-//         //get the mountain title, map that to internal ID, and redirect page
-//         var id = $scope.nameTitleMap[marker.getTitle()]._id;
-//         $location.path('/mountains/' + id);
-//         $scope.$apply();
-
-//     }
-
-//     function markerMouseOver(marker, e, f) {
-//         $scope.map.label.title = $scope.nameTitleMap[marker.getTitle()].name;
-//         $scope.$apply();
-//     }
-
-//     function markerMouseOut(marker, e) {
-//         $scope.map.label.title = null;
-//         $scope.$apply();
-//     }
 
 

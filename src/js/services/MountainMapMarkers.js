@@ -40,6 +40,8 @@ cmr.factory('MountainMapMarkers', ['Mountains', '$http', function(Mountains, $ht
 			return {
 				data: createMarkerData(response)
 			}
+		}, function(error) {
+			throw error.status + " : " + error.data;
 		});		
 	}
 

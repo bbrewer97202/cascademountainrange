@@ -1,0 +1,109 @@
+/*******************************************************************************
+ * mountain list
+ ******************************************************************************/
+.mountainList {    
+    overflow: hidden;
+    padding: 15px;
+}
+
+.mountainList a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.mountainListLinks {
+    @include span(last 7 of 12);    
+}
+
+.mountainListFilter li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+.mountainListMap .angular-google-map-container {
+    /*width: 200px;*/
+    height: 560px;
+}
+
+.mountainListMap,
+.mountainListLinks {
+    // border: solid 2px $colorCellBorder;
+    // background-color: $colorCellBackground;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.mountainListLinks {
+    padding-bottom: 3px;
+}
+
+.mountainListTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: $colorCellBackground;
+    padding: 0.2em;
+}
+
+.mountainListTable thead {
+    background-color: $colorCellHeadBackground;
+    border-bottom: solid 1px #666;
+    width: 100%;
+    &.name {
+        [data-filter-type="name"] {
+            font-weight: bold;
+            &.reverse {
+                font-style: italic;
+            }
+        }
+    }
+    &.lat {
+        [data-filter-type="lat"] {
+            font-weight: bold;
+            &.reverse {
+                font-style: italic;
+            }            
+        }
+    }
+    &.elevation {
+        [data-filter-type="elevation"] {
+            font-weight: bold;
+            &.reverse {
+                font-style: italic;
+            }            
+        }
+    }  
+    &.state {
+        [data-filter-type="state"] {
+            font-weight: bold;
+            &.reverse {
+                font-style: italic;
+            }            
+        }
+    }  
+}
+
+.mountainListLinks tr:hover {
+    background-color: rgba(125,147,108,0.2);
+}
+
+.mountainListLinks th,
+.mountainListLinks td {
+    padding: 0.3em 0.625em;
+    vertical-align: top;
+    font-size: 80%;
+    text-align: left;
+}
+
+.mountainListLinks th {
+    cursor: pointer;
+    font-size: 90%;
+    font-weight: normal;
+    user-select: none;
+}
+
+.mountainListLinks th:hover {
+    text-decoration: underline
+}
+
+.mountainListLinks a {
+    color: #333;
+}

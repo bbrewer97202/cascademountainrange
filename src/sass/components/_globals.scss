@@ -1,0 +1,19 @@
+/*******************************************************************************
+ * globals
+ ******************************************************************************/
+$susy: (
+  columns: 12,
+  gutters: 1/4,
+  math: fluid,
+  output: float,
+  gutter-position: inside,
+);
+
+//colors
+$colorLabel: #e6dc4b;
+$colorCallout: #6d5536;
+$colorBackground: #c3baa5;
+$colorBackgroundAlt: #D2CBB9; //#c8b693;
+$colorCellBackground: transparent; //#dbdeb7;
+$colorCellBorder: #7d936c;
+$colorCellHeadBackground: #7d936c;

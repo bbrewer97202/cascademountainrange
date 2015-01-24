@@ -1,0 +1,24 @@
+/*******************************************************************************
+ * CMR PHOTO
+ ******************************************************************************/
+.cmrPhoto {
+    width: 30%;
+    border: solid 4px #6d5536;
+    margin: 0 0 20px 0;
+}
+
+.cmrPhoto img {
+    max-width: 100%;
+    display: block;
+}
+
+.cmrPhoto-caption,
+.cmrPhoto-credit {
+    padding: 0.3em;
+    color: #e6dc4b;
+    background-color: #6d5536; /* #58291a; */
+}
+
+.cmrPhoto-credit {
+    font-size: 80%;
+}

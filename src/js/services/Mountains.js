@@ -16,7 +16,6 @@ cmr.factory('Mountains', ['$http', function($http) {
 	function getMountainById(id) {
 		return $http.get('/api/mountains/' + id)
 			.then(function(response) {
-				console.log("Response:", response);
 				return response.data;
 			})
 	}

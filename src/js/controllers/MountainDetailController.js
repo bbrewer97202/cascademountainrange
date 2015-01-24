@@ -7,8 +7,6 @@ cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountains
     //TODO: error handling on ID
     Mountains.getMountainById($routeParams.id).then(function(data) {
 
-        console.log("got mountain " + $routeParams.id + ": ", data);
-
         $scope.mountain = data;
         $scope.map = {
             center: {
