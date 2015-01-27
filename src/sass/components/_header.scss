@@ -6,15 +6,25 @@ header {
     background-color: $colorCallout;
     h1 {
         margin: 0;
+        font-size: 1em;
+        @include breakpoint($desktop) {
+            font-size: 2em;
+        }        
     }
     a {
         display: block;
         font-family: 'Questrial', sans-serif;
         color: $colorLabel;
         font-weight: normal;
-        padding: 0.6em;
         margin: 0;
         text-decoration: none;
+        padding: 0.35em;
+        text-align: center;
+
+        @include breakpoint($desktop) {
+            padding: 0.6em;
+            text-align: left;
+        }
     }  
 }
 

@@ -1,0 +1,68 @@
+<div class="homepage">
+
+    <!-- mountain list -->
+    <div class="mountainList" ng-controller="MountainListController">
+
+        <form class="regionSelector">
+            <fieldset> 
+                <input id="regionAll" type="radio" ng-model="region" value="all" ng-change="regionChange()">
+                <label for="regionAll">Range</label>
+            </fieldset>
+            <fieldset>
+                <input id="regionBC" type="radio" ng-model="region" value="bc" ng-change="regionChange()">
+                <label for="regionBC">British Columbia</label>
+            </fieldset>
+            <fieldset>
+                <input id="regionWA" type="radio" ng-model="region" value="wa" ng-change="regionChange()">
+                <label for="regionWA">Washington</label>
+            </fieldset>
+            <fieldset>
+                <input id="regionOR" type="radio" ng-model="region" value="or" ng-change="regionChange()">
+                <label for="regionOR">Oregon</label>
+            </fieldset>
+            <fieldset>
+                <input id="regionCA" type="radio" ng-model="region" value="ca" ng-change="regionChange()">
+                <label for="regionCA">California</label>
+            </fieldset>
+        </form>
+
+        <table ng-mouseleave="mountainBlur()" class="mountainListTable">
+            <thead class="{{filterType}}">
+                <tr>
+                    <th data-filter-type="name" class="col1" ng-click="setFilter('name')" ng-class="{'reverse': filterReverse}">Name</th>
+                    <th data-filter-type="state" class="col2" ng-click="setFilter('state')" ng-class="{'reverse': filterReverse}">Location</th>
+                    <th data-filter-type="lat" class="col3" ng-click="setFilter('lat')" ng-class="{'reverse': filterReverse}">Latitude</th>
+                    <th data-filter-type="elevation" class="col4" ng-click="setFilter('elevation')" ng-class="{'reverse': filterReverse}">Elevation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp" ng-mouseover="mountainFocus(mtn.id)">
+                    <td><a href="#/mountains/{{mtn.id}}">{{mtn.name}}</a></td>
+                    <td>{{mtn.state}}</td>
+                    <td>{{mtn.lat}}</td>
+                    <td>{{mtn.elevation|number}} ft.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- mountain list map -->
+    <div class="mountainListMap" ng-controller="MountainListMapController">
+        <ui-gmap-google-map 
+            center="map.center"
+            zoom="map.zoom"
+            dragging="map.dragging"
+            bounds="map.bounds"
+            events="map.events"
+            options="map.options"
+            pan="true"
+            control="map.control">
+            <ui-gmap-markers models="markers" coords="'self'" icon="'icon'" events="markerEvents">
+                <ui-gmap-windows show="'show'" coords="'self'" options="'options'">
+                    <div ng-non-bindable>{{title}}</div>
+                </ui-gmap-windows>
+            </ui-gmap-markers>       
+        </ui-gmap-google-map>
+    </div>
+
+</div>

@@ -77,7 +77,7 @@ cmr.controller('MountainListMapController',
         markerUnfocus($scope.markerFocusedById);
     });
 
-    $scope.$on('geoTargetChange', function(e, id) {
+    $scope.$on('regionChange', function(e, id) {
 
         //TODO: clean up and move to service
 
@@ -86,22 +86,22 @@ cmr.controller('MountainListMapController',
         var zoom = DEFAULT_ZOOM;
 
         switch (id) {
-            case 'OR':
+            case 'or':
                 lat = 44.06414336303867;
                 lon = -121.88916015625;
                 zoom = 7;
                 break;
-            case 'WA':
+            case 'wa':
                 lat = 47.38369696135246;
                 lon = -121.1640625;
                 zoom = 7;
                 break; 
-            case 'CA':
+            case 'ca':
                 lat = 39.793490785895294;
                 lon = -121.39048385620117;
                 zoom = 7;
                 break; 
-            case 'BC':
+            case 'bc':
                 lat = 50.82002641688227;
                 lon = -120.900390625;
                 zoom = 7;
@@ -114,7 +114,6 @@ cmr.controller('MountainListMapController',
             longitude: lon
         };
         $scope.map.zoom = zoom;
-
     });
 
     /**

@@ -1,6 +1,9 @@
 /*******************************************************************************
  * globals
  ******************************************************************************/
+
+$desktop: 37.5em; //600px at 16
+
 $susy: (
   columns: 12,
   gutters: 1/4,
@@ -12,6 +15,7 @@ $susy: (
 //colors
 $colorLabel: #e6dc4b;
 $colorCallout: #6d5536;
+$colorActive: #cc461f;
 $colorBackground: #c3baa5;
 $colorBackgroundAlt: #D2CBB9; //#c8b693;
 $colorCellBackground: transparent; //#dbdeb7;

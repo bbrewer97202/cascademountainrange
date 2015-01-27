@@ -7,9 +7,7 @@ html, body {
 
 .contents {
     margin: 0 auto;
-    // width: 92%;
-    // max-width: 950px;
-    @include container (60em);
+    @include container(60em);
     background-color: $colorBackgroundAlt;
     border-radius: 0px 0px 5px 5px;
     box-shadow: 3px 3px 6px -1px rgba(36,36,33,0.20), -3px 3px 6px -1px rgba(36,36,33,0.20);

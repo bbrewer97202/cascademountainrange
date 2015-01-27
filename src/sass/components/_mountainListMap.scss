@@ -1,9 +1,18 @@
 /*******************************************************************************
  * mountain list map
  ******************************************************************************/
-.mountainListMap {
-    @include span(4 of 12);
+.mountainListMap {    
     position: relative;
+    @include susy-breakpoint($desktop, $susy) {        
+        @include span(5 of 12);    
+    }
+
+    .angular-google-map-container {
+        height: 400px;
+        @include susy-breakpoint($desktop, $susy) {
+            height: 560px;    
+        }        
+    }
 }
 
 .active {

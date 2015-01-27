@@ -6,6 +6,7 @@ cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', f
     $scope.filterType = 'lat';    
     $scope.filterLocation = {};
     $scope.filterReverse = true;
+    $scope.region = 'all';
 
     $scope.mountainFocus = function(id) {    
         if (id !== $scope.focusLocation) {            
@@ -19,9 +20,10 @@ cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', f
         $scope.focusLocation = "";
     }
 
-    $scope.geoBoundaryChange = function(id) {
+    $scope.regionChange = function() {
+        var id = ($scope.region === 'all') ? '' : $scope.region;
         $scope.filterLocation = { state: id }
-        $rootScope.$broadcast('geoTargetChange', id);
+        $rootScope.$broadcast('regionChange', id);
     }
 
     $scope.setFilter = function(id) {

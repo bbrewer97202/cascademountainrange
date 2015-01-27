@@ -1,18 +1,14 @@
 /*******************************************************************************
- * mountain list
+ * mountainlist
  ******************************************************************************/
-.mountainList {    
-    overflow: hidden;
-    padding: 15px;
-}
-
-.mountainList a {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.mountainListLinks {
-    @include span(last 7 of 12);    
+.mountainList {
+    @include susy-breakpoint($desktop, $susy) {
+        @include span(last 7 of 12);    
+    }        
+    a {
+        text-decoration: underline;
+        cursor: pointer;
+    }
 }
 
 .mountainListFilter li {
@@ -20,24 +16,15 @@
     list-style-type: none;
 }
 
-.mountainListMap .angular-google-map-container {
-    /*width: 200px;*/
-    height: 560px;
-}
-
-.mountainListMap,
-.mountainListLinks {
+.mountainList {
     // border: solid 2px $colorCellBorder;
     // background-color: $colorCellBackground;
     border-radius: 5px 5px 5px 5px;
 }
 
-.mountainListLinks {
-    padding-bottom: 3px;
-}
-
 .mountainListTable {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     background-color: $colorCellBackground;
     padding: 0.2em;
@@ -47,63 +34,130 @@
     background-color: $colorCellHeadBackground;
     border-bottom: solid 1px #666;
     width: 100%;
-    &.name {
-        [data-filter-type="name"] {
-            font-weight: bold;
-            &.reverse {
-                font-style: italic;
+
+    &.name [data-filter-type="name"],
+    &.lat [data-filter-type="lat"],
+    &.elevation [data-filter-type="elevation"],
+    &.state [data-filter-type="state"] {    
+        &:after {
+            content: "";
+            display: inline-block;
+            width: 0; 
+            height: 0; 
+            border-left: 0.36em solid transparent;
+            border-right: 0.36em solid transparent;
+            border-bottom: 0.36em solid black;
+            margin-left: 0.4em;
+            vertical-align: middle;
+        }
+
+        &.reverse {
+            &:after {
+                border-top: 0.36em solid black;
+                border-bottom: 0;
             }
-        }
+        }        
     }
-    &.lat {
-        [data-filter-type="lat"] {
-            font-weight: bold;
-            &.reverse {
-                font-style: italic;
-            }            
-        }
-    }
-    &.elevation {
-        [data-filter-type="elevation"] {
-            font-weight: bold;
-            &.reverse {
-                font-style: italic;
-            }            
-        }
-    }  
-    &.state {
-        [data-filter-type="state"] {
-            font-weight: bold;
-            &.reverse {
-                font-style: italic;
-            }            
-        }
-    }  
 }
 
-.mountainListLinks tr:hover {
+.mountainList tr:hover {
     background-color: rgba(125,147,108,0.2);
 }
 
-.mountainListLinks th,
-.mountainListLinks td {
-    padding: 0.3em 0.625em;
+.mountainList th,
+.mountainList td {
+    padding: 0.3em 0;
     vertical-align: top;
     font-size: 80%;
     text-align: left;
+    @include susy-breakpoint($desktop, $susy) {
+        padding: 0.3em 0.625em;        
+    }
 }
 
-.mountainListLinks th {
+.mountainList th {
     cursor: pointer;
     font-size: 90%;
     font-weight: normal;
     user-select: none;
+    &.col1 {
+        width: 35%;
+    }
+    &.col2 {
+        width: 12%;   
+    }
+    &.col3 {
+        width: 23%;
+    }
+    &.col4 {
+        width: 20%;
+        text-align: right;
+    }
 }
 
-.mountainListLinks th:hover {
+// .mountainList td {
+//     &.col1 {
+//     }
+//     &.col2 {
+//     }
+//     &.col3 {
+//         text-align: right;
+//     }
+//     &.col4 {
+//         text-align: right;
+//     }
+// }    
+
+.mountainList th:hover {
     text-decoration: underline
 }
 
-.mountainListLinks a {
+.mountainList a {
     color: #333;
+    user-select: none;
+}
+
+/*******************************************************************************
+ * region selector
+ ******************************************************************************/
+.regionSelector {
+    margin: 0 0 1em 0;
+    font-size: 80%;
+
+    input {
+        visibility: hidden;
+        width: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        float: left;
+    }
+
+    fieldset {
+        padding: 0;
+        margin: 0 0 0.5em 0;
+        border: none;
+        vertical-align: top;
+        
+        @include breakpoint($desktop) {
+            display: inline-block;
+            margin: 0;        
+        }
+    }
+
+    label {
+        display: block;
+        border-radius: 0.5em;
+        color: $colorLabel;
+        background-color: $colorCallout;
+        padding: 0.9em 0.9em;
+        cursor: pointer;
+        @include breakpoint($desktop) {
+            padding: 0.5em 0.9em;
+        }        
+    }
+
+    input:checked + label {
+        background-color: $colorActive;
+    }
 }

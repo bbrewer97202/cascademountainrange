@@ -17,8 +17,7 @@ cmr.config(['uiGmapGoogleMapApiProvider', '$routeProvider', function(GoogleMapAp
     //routes
     $routeProvider.
         when('/mountains', {
-            templateUrl: 'partials/mountain-list.html',
-            controller: 'MountainListController'
+            templateUrl: 'partials/homepage.html'
         }).
         when('/mountains/:id', {
             templateUrl: 'partials/mountain-detail.html',

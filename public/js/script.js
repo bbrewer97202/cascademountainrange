@@ -17,8 +17,7 @@ cmr.config(['uiGmapGoogleMapApiProvider', '$routeProvider', function(GoogleMapAp
     //routes
     $routeProvider.
         when('/mountains', {
-            templateUrl: 'partials/mountain-list.html',
-            controller: 'MountainListController'
+            templateUrl: 'partials/homepage.html'
         }).
         when('/mountains/:id', {
             templateUrl: 'partials/mountain-detail.html',
@@ -96,6 +95,7 @@ cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', f
     $scope.filterType = 'lat';    
     $scope.filterLocation = {};
     $scope.filterReverse = true;
+    $scope.region = 'all';
 
     $scope.mountainFocus = function(id) {    
         if (id !== $scope.focusLocation) {            
@@ -109,9 +109,10 @@ cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', f
         $scope.focusLocation = "";
     }
 
-    $scope.geoBoundaryChange = function(id) {
+    $scope.regionChange = function() {
+        var id = ($scope.region === 'all') ? '' : $scope.region;
         $scope.filterLocation = { state: id }
-        $rootScope.$broadcast('geoTargetChange', id);
+        $rootScope.$broadcast('regionChange', id);
     }
 
     $scope.setFilter = function(id) {
@@ -215,7 +216,7 @@ cmr.controller('MountainListMapController',
         markerUnfocus($scope.markerFocusedById);
     });
 
-    $scope.$on('geoTargetChange', function(e, id) {
+    $scope.$on('regionChange', function(e, id) {
 
         //TODO: clean up and move to service
 
@@ -224,22 +225,22 @@ cmr.controller('MountainListMapController',
         var zoom = DEFAULT_ZOOM;
 
         switch (id) {
-            case 'OR':
+            case 'or':
                 lat = 44.06414336303867;
                 lon = -121.88916015625;
                 zoom = 7;
                 break;
-            case 'WA':
+            case 'wa':
                 lat = 47.38369696135246;
                 lon = -121.1640625;
                 zoom = 7;
                 break; 
-            case 'CA':
+            case 'ca':
                 lat = 39.793490785895294;
                 lon = -121.39048385620117;
                 zoom = 7;
                 break; 
-            case 'BC':
+            case 'bc':
                 lat = 50.82002641688227;
                 lon = -120.900390625;
                 zoom = 7;
@@ -252,7 +253,6 @@ cmr.controller('MountainListMapController',
             longitude: lon
         };
         $scope.map.zoom = zoom;
-
     });
 
     /**

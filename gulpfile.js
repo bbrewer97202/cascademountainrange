@@ -8,7 +8,7 @@ gulp.task('compass', function() {
         .pipe(compass({
             css: './public/css',
             sass: './src/sass',
-            require: ['susy']
+            require: ['breakpoint','susy']
         }))
         .on('error', function() {
             console.log("sass error TODO");
