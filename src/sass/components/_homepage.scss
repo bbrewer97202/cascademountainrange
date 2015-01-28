@@ -2,10 +2,8 @@
  * homepage
  ******************************************************************************/
 .homepage {    
-    // overflow: hidden;
     padding: 0.6em;
     @include susy-breakpoint($desktop, $susy) {
-    	// @include container(60em);
         padding: 1em;        
-    }        
+    }
 }

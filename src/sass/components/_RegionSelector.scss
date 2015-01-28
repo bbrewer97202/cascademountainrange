@@ -1,0 +1,44 @@
+/*******************************************************************************
+ * region selector
+ ******************************************************************************/
+.RegionSelector {
+    margin: 0 0 1em 0;
+    font-size: 80%;
+}
+
+.RegionSelector-input {
+    visibility: hidden;
+    width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+}
+
+.RegionSelector-input:checked + label {
+    background-color: $colorActive;
+}
+
+.RegionSelector-group {
+    padding: 0;
+    margin: 0 0 0.5em 0;
+    border: none;
+    vertical-align: top;
+
+    @include breakpoint($desktop) {
+        display: inline-block;
+        margin: 0 0 0.2em 0;        
+    } 
+}
+
+.RegionSelector-label {
+    display: block;
+    border-radius: 0.5em;
+    color: $colorCTAText;
+    background-color: $colorCTABackground;
+    padding: 0.9em 0.9em;
+    cursor: pointer;
+    @include breakpoint($desktop) {
+        padding: 0.5em 0.9em;
+    }        
+}

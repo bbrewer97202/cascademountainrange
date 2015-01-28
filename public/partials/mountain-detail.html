@@ -1,14 +1,24 @@
-<div class="mountainDetail">
+<div class="Breadcrumb">
+    <a href="/#mountains">All Mountains</a> : 
+    <a href="/#mountains/">{{stateFormat()}}</a> : 
+    {{mountain.name}}
+</div>
 
-    <h2>{{mountain.name}}</h2>
-    <p>Location: {{stateFormat()}}</p>
-    <p>Elevation: {{mountain.elevation | number}} feet</p>
-    <p>Last Eruption: {{mountain.eruption}}</p>
+<article class="MountainDetail">
 
-    <div cmr-photo photo="mountain.photos[0]"></div>
-    <div cmr-photo photo="mountain.photos[1]"></div>
+    <section class="MountainInfo">
+        <h1 class="MountainInfo-name">{{mountain.name}}</h1>
+        <p>Location: {{stateFormat()}}</p>
+        <p>Elevation: {{mountain.elevation | number}} feet</p>
+        <p>Last Eruption: {{mountain.eruption}}</p>
+    </section>
 
-    <div class="mountainDetailMap">
+    <section class="MountainPhotos">
+        <div cmr-photo photo="mountain.photos[0]"></div>
+        <div cmr-photo photo="mountain.photos[1]"></div>
+    </section>
+
+    <div class="MountainDetailMap">
         <ui-gmap-google-map 
             center="map.center"
             zoom="map.zoom"
@@ -21,6 +31,5 @@
         </ui-gmap-google-map>        
     </div>
 
-</div>
+</article>
 
-<p><a href="/#mountains">All Mountains</a></p>

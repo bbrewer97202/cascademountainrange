@@ -403,7 +403,7 @@ html, body {
   font-family: sans-serif;
   font-size: 16px;
   margin: 0;
-  background-color: #c3baa5;
+  background-color: #E0DFDC;
 }
 
 .contents {
@@ -411,8 +411,9 @@ html, body {
   max-width: 60em;
   margin-left: auto;
   margin-right: auto;
-  background-color: #D2CBB9;
+  background-color: #F0F0F0;
   border-radius: 0px 0px 5px 5px;
+  padding-bottom: 1em;
   box-shadow: 3px 3px 6px -1px rgba(36, 36, 33, 0.2), -3px 3px 6px -1px rgba(36, 36, 33, 0.2);
 }
 .contents:after {
@@ -426,7 +427,7 @@ html, body {
  ******************************************************************************/
 header {
   box-shadow: 0 3px 6px -1px rgba(36, 36, 33, 0.4);
-  background-color: #6d5536;
+  background-color: #315F6D;
 }
 header h1 {
   margin: 0;
@@ -454,6 +455,19 @@ header a {
   }
 }
 
+.Breadcrumb {
+  padding: 0.6rem;
+  font-size: 70%;
+}
+@media (min-width: 37.5em) {
+  .Breadcrumb {
+    padding: 2rem;
+  }
+}
+.Breadcrumb a {
+  color: #333;
+}
+
 /*******************************************************************************
  * homepage
  ******************************************************************************/
@@ -467,10 +481,58 @@ header a {
 }
 
 /*******************************************************************************
- * mountainlist
+ * region selector
+ ******************************************************************************/
+.RegionSelector {
+  margin: 0 0 1em 0;
+  font-size: 80%;
+}
+
+.RegionSelector-input {
+  visibility: hidden;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: left;
+}
+
+.RegionSelector-input:checked + label {
+  background-color: #C74848;
+}
+
+.RegionSelector-group {
+  padding: 0;
+  margin: 0 0 0.5em 0;
+  border: none;
+  vertical-align: top;
+}
+@media (min-width: 37.5em) {
+  .RegionSelector-group {
+    display: inline-block;
+    margin: 0 0 0.2em 0;
+  }
+}
+
+.RegionSelector-label {
+  display: block;
+  border-radius: 0.5em;
+  color: #FDF0F0;
+  background-color: #4E4C56;
+  padding: 0.9em 0.9em;
+  cursor: pointer;
+}
+@media (min-width: 37.5em) {
+  .RegionSelector-label {
+    padding: 0.5em 0.9em;
+  }
+}
+
+/*******************************************************************************
+ * MountainList
  ******************************************************************************/
 @media (min-width: 37.5em) {
-  .mountainList {
+  .MountainList {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -480,7 +542,7 @@ header a {
     padding-right: 0.83333%;
   }
 }
-.mountainList a {
+.MountainList a {
   text-decoration: underline;
   cursor: pointer;
 }
@@ -490,128 +552,100 @@ header a {
   list-style-type: none;
 }
 
-.mountainList {
-  border-radius: 5px 5px 5px 5px;
-}
-
-.mountainListTable {
+/*******************************************************************************
+ * MountainListTable
+ ******************************************************************************/
+.MountainListTable {
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
-  background-color: transparent;
+  border-spacing: 0;
   padding: 0.2em;
 }
 
-.mountainListTable thead {
-  background-color: #7d936c;
-  border-bottom: solid 1px #666;
+.MountainListTable thead {
   width: 100%;
 }
-.mountainListTable thead.name [data-filter-type="name"]:after, .mountainListTable thead.lat [data-filter-type="lat"]:after, .mountainListTable thead.elevation [data-filter-type="elevation"]:after, .mountainListTable thead.state [data-filter-type="state"]:after {
+.MountainListTable thead.name [data-filter-type="name"], .MountainListTable thead.lat [data-filter-type="lat"], .MountainListTable thead.elevation [data-filter-type="elevation"], .MountainListTable thead.state [data-filter-type="state"] {
+  background-color: #C74848;
+}
+.MountainListTable thead.name [data-filter-type="name"]:after, .MountainListTable thead.lat [data-filter-type="lat"]:after, .MountainListTable thead.elevation [data-filter-type="elevation"]:after, .MountainListTable thead.state [data-filter-type="state"]:after {
   content: "";
   display: inline-block;
   width: 0;
   height: 0;
   border-left: 0.36em solid transparent;
   border-right: 0.36em solid transparent;
-  border-bottom: 0.36em solid black;
+  border-bottom: 0.36em solid #FDF0F0;
   margin-left: 0.4em;
   vertical-align: middle;
 }
-.mountainListTable thead.name [data-filter-type="name"].reverse:after, .mountainListTable thead.lat [data-filter-type="lat"].reverse:after, .mountainListTable thead.elevation [data-filter-type="elevation"].reverse:after, .mountainListTable thead.state [data-filter-type="state"].reverse:after {
-  border-top: 0.36em solid black;
+.MountainListTable thead.name [data-filter-type="name"].reverse:after, .MountainListTable thead.lat [data-filter-type="lat"].reverse:after, .MountainListTable thead.elevation [data-filter-type="elevation"].reverse:after, .MountainListTable thead.state [data-filter-type="state"].reverse:after {
+  border-top: 0.36em solid #FDF0F0;
   border-bottom: 0;
 }
 
-.mountainList tr:hover {
-  background-color: rgba(125, 147, 108, 0.2);
+.MountainListTable-row:hover {
+  background-color: rgba(49, 95, 109, 0.2);
 }
 
-.mountainList th,
-.mountainList td {
-  padding: 0.3em 0;
+.MountainListTable-head,
+.MountainListTable-cell {
   vertical-align: top;
   font-size: 80%;
-  text-align: left;
 }
 @media (min-width: 37.5em) {
-  .mountainList th,
-  .mountainList td {
+  .MountainListTable-head,
+  .MountainListTable-cell {
     padding: 0.3em 0.625em;
   }
 }
 
-.mountainList th {
+.MountainListTable-head {
   cursor: pointer;
   font-size: 90%;
   font-weight: normal;
   user-select: none;
+  color: #FDF0F0;
+  padding: 0.5em;
+  background-color: #4E4C56;
 }
-.mountainList th.col1 {
-  width: 35%;
+
+.MountainListTable-cell {
+  padding: 0.3em 0.5em;
 }
-.mountainList th.col2 {
-  width: 12%;
+
+.MountainListTable-head_col1,
+.MountainListTable-cell_col1,
+.MountainListTable-head_col3,
+.MountainListTable-cell_col3 {
+  text-align: left;
 }
-.mountainList th.col3 {
-  width: 23%;
+
+.MountainListTable-head_col2,
+.MountainListTable-cell_col2 {
+  text-align: center;
 }
-.mountainList th.col4 {
-  width: 20%;
+
+.MountainListTable-head_col4,
+.MountainListTable-cell_col4 {
   text-align: right;
 }
 
-.mountainList th:hover {
-  text-decoration: underline;
+.MountainListTable-head_col1 {
+  border-top-left-radius: 0.45em;
+  border-bottom-left-radius: 0.45em;
 }
 
-.mountainList a {
+.MountainListTable-head_col4 {
+  border-top-right-radius: 0.45em;
+  border-bottom-right-radius: 0.45em;
+}
+
+.MountainListTable a {
   color: #333;
   user-select: none;
-}
-
-/*******************************************************************************
- * region selector
- ******************************************************************************/
-.regionSelector {
-  margin: 0 0 1em 0;
-  font-size: 80%;
-}
-.regionSelector input {
-  visibility: hidden;
-  width: 0;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  float: left;
-}
-.regionSelector fieldset {
-  padding: 0;
-  margin: 0 0 0.5em 0;
-  border: none;
-  vertical-align: top;
-}
-@media (min-width: 37.5em) {
-  .regionSelector fieldset {
-    display: inline-block;
-    margin: 0;
-  }
-}
-.regionSelector label {
-  display: block;
-  border-radius: 0.5em;
-  color: #e6dc4b;
-  background-color: #6d5536;
-  padding: 0.9em 0.9em;
-  cursor: pointer;
-}
-@media (min-width: 37.5em) {
-  .regionSelector label {
-    padding: 0.5em 0.9em;
-  }
-}
-.regionSelector input:checked + label {
-  background-color: #cc461f;
+  text-decoration: none;
 }
 
 /*******************************************************************************
@@ -645,12 +679,11 @@ header a {
 }
 
 .mountain-marker-window {
-  background: rgba(109, 85, 54, 0.8);
+  background-color: #315F6D;
   color: #e6dc4b;
   padding: 0.4em;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
-  /*width: 200px;*/
   margin-top: -56px;
   margin-left: -39px;
   text-align: center;
@@ -666,7 +699,7 @@ header a {
   position: absolute;
   border-style: solid;
   border-width: 18px 6px 0;
-  border-color: rgba(109, 85, 54, 0.8) transparent;
+  border-color: #315F6D transparent;
   display: block;
   width: 0;
   z-index: 1;
@@ -677,18 +710,62 @@ header a {
 /*******************************************************************************
  * mountain detail
  ******************************************************************************/
-.mountainDetailMap {
-  padding: 20px;
+.MountainDetail {
+  padding: 0.6em;
+}
+@media (min-width: 37.5em) {
+  .MountainDetail {
+    padding: 1em;
+  }
 }
 
-.mountainDetailMap h2 {
+/* info */
+@media (min-width: 37.5em) {
+  .MountainInfo {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 50%;
+    float: left;
+    padding-left: 0.83333%;
+    padding-right: 0.83333%;
+  }
+}
+
+.MountainInfo-name {
   font-family: 'Questrial', sans-serif;
   font-weight: normal;
+  margin-top: 0;
 }
 
-.mountainDetailMap .angular-google-map-container {
-  width: 400px;
+/* map */
+@media (min-width: 37.5em) {
+  .MountainDetailMap {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 50%;
+    float: right;
+    padding-left: 0.83333%;
+    padding-right: 0.83333%;
+  }
+}
+.MountainDetailMap .angular-google-map-container {
+  width: 100%;
   height: 400px;
+}
+
+/* photo */
+@media (min-width: 37.5em) {
+  .MountainPhotos {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 50%;
+    float: left;
+    padding-left: 0.83333%;
+    padding-right: 0.83333%;
+  }
 }
 
 /*******************************************************************************

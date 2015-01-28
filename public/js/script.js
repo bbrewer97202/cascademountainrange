@@ -142,9 +142,13 @@ cmr.controller('MountainListMapController',
     function($scope, $location, MountainMapMarkers, GoogleMapApi) {
 
     //TODO: move to service
-    var DEFAULT_LAT = 45.14353713591516;
-    var DEFAULT_LON = -121.955078125;
-    var DEFAULT_ZOOM = 6;
+    // var DEFAULT_LAT = 45.14353713591516;
+    // var DEFAULT_LON = -121.955078125;
+    // var DEFAULT_ZOOM = 6;
+
+    var DEFAULT_LAT = 44.087029720084644;
+    var DEFAULT_LON = -120.78863799999999;
+    var DEFAULT_ZOOM = 5;
 
     $scope.markerEvents = {
         click: markerClick,
@@ -162,7 +166,8 @@ cmr.controller('MountainListMapController',
             $scope.markersById[data.data[i].id] = i;
         }
 
-        console.log("markers init", $scope.markers);
+        //debug
+        // console.log("markers init", $scope.markers);
 
         //map init
         GoogleMapApi.then(function(maps) {
@@ -241,9 +246,9 @@ cmr.controller('MountainListMapController',
                 zoom = 7;
                 break; 
             case 'bc':
-                lat = 50.82002641688227;
-                lon = -120.900390625;
-                zoom = 7;
+                lat = 49.66450788807946;
+                lon = -121.44601631164551;
+                zoom = 8;
                 break;                 
             default: 
         }

@@ -1,46 +1,46 @@
 <div class="homepage">
 
     <!-- mountain list -->
-    <div class="mountainList" ng-controller="MountainListController">
+    <div class="MountainList" ng-controller="MountainListController">
 
-        <form class="regionSelector">
-            <fieldset> 
-                <input id="regionAll" type="radio" ng-model="region" value="all" ng-change="regionChange()">
-                <label for="regionAll">Range</label>
+        <form class="RegionSelector">
+            <fieldset class="RegionSelector-group"> 
+                <input class="RegionSelector-input" id="regionAll" type="radio" ng-model="region" value="all" ng-change="regionChange()">
+                <label class="RegionSelector-label" for="regionAll">Range</label>
             </fieldset>
-            <fieldset>
-                <input id="regionBC" type="radio" ng-model="region" value="bc" ng-change="regionChange()">
-                <label for="regionBC">British Columbia</label>
+            <fieldset class="RegionSelector-group">
+                <input class="RegionSelector-input" id="regionBC" type="radio" ng-model="region" value="bc" ng-change="regionChange()">
+                <label class="RegionSelector-label" for="regionBC">British Columbia</label>
             </fieldset>
-            <fieldset>
-                <input id="regionWA" type="radio" ng-model="region" value="wa" ng-change="regionChange()">
-                <label for="regionWA">Washington</label>
+            <fieldset class="RegionSelector-group">
+                <input class="RegionSelector-input" id="regionWA" type="radio" ng-model="region" value="wa" ng-change="regionChange()">
+                <label class="RegionSelector-label" for="regionWA">Washington</label>
             </fieldset>
-            <fieldset>
-                <input id="regionOR" type="radio" ng-model="region" value="or" ng-change="regionChange()">
-                <label for="regionOR">Oregon</label>
+            <fieldset class="RegionSelector-group">
+                <input class="RegionSelector-input" id="regionOR" type="radio" ng-model="region" value="or" ng-change="regionChange()">
+                <label class="RegionSelector-label" for="regionOR">Oregon</label>
             </fieldset>
-            <fieldset>
-                <input id="regionCA" type="radio" ng-model="region" value="ca" ng-change="regionChange()">
-                <label for="regionCA">California</label>
+            <fieldset class="RegionSelector-group">
+                <input class="RegionSelector-input" id="regionCA" type="radio" ng-model="region" value="ca" ng-change="regionChange()">
+                <label class="RegionSelector-label" for="regionCA">California</label>
             </fieldset>
         </form>
 
-        <table ng-mouseleave="mountainBlur()" class="mountainListTable">
-            <thead class="{{filterType}}">
+        <table class="MountainListTable" ng-mouseleave="mountainBlur()">
+            <thead ng-class="filterType">
                 <tr>
-                    <th data-filter-type="name" class="col1" ng-click="setFilter('name')" ng-class="{'reverse': filterReverse}">Name</th>
-                    <th data-filter-type="state" class="col2" ng-click="setFilter('state')" ng-class="{'reverse': filterReverse}">Location</th>
-                    <th data-filter-type="lat" class="col3" ng-click="setFilter('lat')" ng-class="{'reverse': filterReverse}">Latitude</th>
-                    <th data-filter-type="elevation" class="col4" ng-click="setFilter('elevation')" ng-class="{'reverse': filterReverse}">Elevation</th>
+                    <th data-filter-type="name" class="MountainListTable-head MountainListTable-head_col1" ng-click="setFilter('name')" ng-class="{'reverse': filterReverse}">Name</th>
+                    <th data-filter-type="state" class="MountainListTable-head MountainListTable-head_col2" ng-click="setFilter('state')" ng-class="{'reverse': filterReverse}">Location</th>
+                    <th data-filter-type="lat" class="MountainListTable-head MountainListTable-head_col3" ng-click="setFilter('lat')" ng-class="{'reverse': filterReverse}">Latitude</th>
+                    <th data-filter-type="elevation" class="MountainListTable-head MountainListTable-head_col4" ng-click="setFilter('elevation')" ng-class="{'reverse': filterReverse}">Elevation (ft.)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp" ng-mouseover="mountainFocus(mtn.id)">
-                    <td><a href="#/mountains/{{mtn.id}}">{{mtn.name}}</a></td>
-                    <td>{{mtn.state}}</td>
-                    <td>{{mtn.lat}}</td>
-                    <td>{{mtn.elevation|number}} ft.</td>
+                <tr ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp" class="MountainListTable-row" ng-mouseover="mountainFocus(mtn.id)">
+                    <td class="MountainListTable-cell MountainListTable-cell_col1"><a href="#/mountains/{{mtn.id}}">{{mtn.name}}</a></td>
+                    <td class="MountainListTable-cell MountainListTable-cell_col2">{{mtn.state}}</td>
+                    <td class="MountainListTable-cell MountainListTable-cell_col3">{{mtn.lat}}</td>
+                    <td class="MountainListTable-cell MountainListTable-cell_col4">{{mtn.elevation|number}}</td>
                 </tr>
             </tbody>
         </table>

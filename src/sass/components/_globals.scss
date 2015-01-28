@@ -13,11 +13,21 @@ $susy: (
 );
 
 //colors
+$colorHeaderBackground: #315F6D; //#6d5536;
 $colorLabel: #e6dc4b;
-$colorCallout: #6d5536;
-$colorActive: #cc461f;
-$colorBackground: #c3baa5;
-$colorBackgroundAlt: #D2CBB9; //#c8b693;
-$colorCellBackground: transparent; //#dbdeb7;
-$colorCellBorder: #7d936c;
-$colorCellHeadBackground: #7d936c;
+$colorCTAText: #FDF0F0;
+$colorCTABackground: #4E4C56; //#454444
+$colorActive: #C74848; //#A04D38;
+$colorBackground: #E0DFDC;
+$colorBackgroundAlt: #F0F0F0; //#E8E8E6;
+
+//#
+
+// $colorLabel: #e6dc4b;
+// $colorCallout: #6d5536;
+// $colorActive: #cc461f;
+// $colorBackground: #c3baa5;
+// $colorBackgroundAlt: #D2CBB9; //#c8b693;
+// $colorCellBackground: transparent; //#dbdeb7;
+// $colorCellBorder: #7d936c;
+// $colorCellHeadBackground: #7d936c;
