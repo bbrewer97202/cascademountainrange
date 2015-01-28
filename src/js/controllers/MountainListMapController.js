@@ -1,6 +1,6 @@
 cmr.controller('MountainListMapController', 
-    ['$scope', '$location', 'MountainMapMarkers', 'uiGmapGoogleMapApi', 
-    function($scope, $location, MountainMapMarkers, GoogleMapApi) {
+    ['$scope', '$location', '$routeParams', 'Mountains', 'MountainMapMarkers', 'uiGmapGoogleMapApi', 
+    function($scope, $location, $routeParams, Mountains, MountainMapMarkers, GoogleMapApi) {
 
     //TODO: move to service
     // var DEFAULT_LAT = 45.14353713591516;
@@ -11,13 +11,14 @@ cmr.controller('MountainListMapController',
     var DEFAULT_LON = -120.78863799999999;
     var DEFAULT_ZOOM = 5;
 
+    $scope.regionId = Mountains.getRegionIdByRegionUrl($routeParams.state);
     $scope.markerEvents = {
         click: markerClick,
         mouseover: markerMouseOver,
         mouseout: markerMouseOut        
     };
 
-    MountainMapMarkers.get().then(function(data) {
+    MountainMapMarkers.getRegionById($scope.regionId).then(function(data) {
 
         $scope.markers = data.data;  
         $scope.markersById = {};
@@ -84,6 +85,8 @@ cmr.controller('MountainListMapController',
 
     $scope.$on('regionChange', function(e, id) {
 
+        console.log("regionChange", id);
+
         //TODO: clean up and move to service
 
         var lat = DEFAULT_LAT;
@@ -125,7 +128,7 @@ cmr.controller('MountainListMapController',
      * handle click of a marker
      */
     function markerClick(gMarker, eventName, model) {
-        $location.path('/mountains/' + model.id);
+        $location.path('/mountains/' + Mountains.getRegionUrlById(model.region) + '/' + model.id);
         $scope.$apply();        
     }
 

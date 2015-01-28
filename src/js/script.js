@@ -15,14 +15,18 @@ cmr.config(['uiGmapGoogleMapApiProvider', '$routeProvider', function(GoogleMapAp
     });
 
     //routes
-    $routeProvider.
-        when('/mountains', {
+    $routeProvider
+        .when('/mountains', {
             templateUrl: 'partials/homepage.html'
-        }).
-        when('/mountains/:id', {
+        })
+        .when('/mountains/:state', {
+            templateUrl: 'partials/region.html'
+        })
+        .when('/mountains/:state/:id', {
             templateUrl: 'partials/mountain-detail.html',
-            controller: 'MountainDetailController'                
-        }).otherwise({
+            controller: 'MountainDetailController'   
+        })
+        .otherwise({
             redirectTo: '/mountains'
         });
     

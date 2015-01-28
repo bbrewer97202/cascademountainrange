@@ -11,13 +11,14 @@ cmr.factory('MountainMapMarkers', ['Mountains', '$http', function(Mountains, $ht
 		var count = 0;
 
 		for (var mtn in data) {
-			var mountain = data[mtn];
+			var mountain = data[mtn];		
 			if ((mountain.hasOwnProperty('lat')) && (mountain.hasOwnProperty('lon'))) {
 				markerData.push({
 					id: mountain.id,
 					latitude: mountain.lat,
 					longitude: mountain.lon,
 					title: mountain.name,
+					region: mountain.state,
 					show: false,
 					icon: '/images/map-marker-icon.png',
 					options: {
@@ -57,10 +58,25 @@ cmr.factory('MountainMapMarkers', ['Mountains', '$http', function(Mountains, $ht
 	// 		});
 	// }
 
+	/**
+	 * get list of mountain markers for map with the matching region id
+	 * @return {object} return an object with a "data" key
+	 */
+	function getRegionById(id) {
+		return Mountains.getRegionById(id, function(response) {
+			return {
+				data: createMarkerData(response)
+			}
+		}, function(error) {
+			throw error.status + " : " + error.data;
+		});		
+	}
+
 	/*
 	public methods
 	 */
 	return {
-		get: get	
+		get: get,
+		getRegionById: getRegionById	
 	}
 }]);

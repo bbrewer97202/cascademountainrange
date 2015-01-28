@@ -1,13 +1,6 @@
 <div class="homepage">
 
-    <a href="#/mountains/california">California</a>
-    <a href="#/mountains/oregon">Oregon</a>
-    <a href="#/mountains/washington">Washington</a>
-    <a href="#/mountains/british+columbia">British Columbia</a> 
-
-
     <!-- mountain list -->
-    <!--
     <div class="MountainList" ng-controller="MountainListController">
 
         <form class="RegionSelector">
@@ -43,8 +36,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp" class="MountainListTable-row" ng-mouseover="mountainFocus(mtn.id)">
-                    <td class="MountainListTable-cell MountainListTable-cell_col1"><a href="#/mountains/{{mtn.id}}">{{mtn.name}}</a></td>
+                <tr ng-repeat="mtn in mountains | filter: filterLocation | orderBy: filterProp" class="MountainListTable-row" ng-mouseover="mountainFocus(mtn.id)" ng-click="mountainDetail(mtn.id, mtn.state)">
+                    <td class="MountainListTable-cell MountainListTable-cell_col1">{{mtn.name}}</td>
                     <td class="MountainListTable-cell MountainListTable-cell_col2">{{mtn.state}}</td>
                     <td class="MountainListTable-cell MountainListTable-cell_col3">{{mtn.lat}}</td>
                     <td class="MountainListTable-cell MountainListTable-cell_col4">{{mtn.elevation|number}}</td>
@@ -52,10 +45,8 @@
             </tbody>
         </table>
     </div>
-    -->
 
     <!-- mountain list map -->
-    <!--
     <div class="mountainListMap" ng-controller="MountainListMapController">
         <ui-gmap-google-map 
             center="map.center"
@@ -73,5 +64,5 @@
             </ui-gmap-markers>       
         </ui-gmap-google-map>
     </div>
-    -->
+
 </div>

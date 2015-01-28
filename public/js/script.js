@@ -15,14 +15,18 @@ cmr.config(['uiGmapGoogleMapApiProvider', '$routeProvider', function(GoogleMapAp
     });
 
     //routes
-    $routeProvider.
-        when('/mountains', {
+    $routeProvider
+        .when('/mountains', {
             templateUrl: 'partials/homepage.html'
-        }).
-        when('/mountains/:id', {
+        })
+        .when('/mountains/:state', {
+            templateUrl: 'partials/region.html'
+        })
+        .when('/mountains/:state/:id', {
             templateUrl: 'partials/mountain-detail.html',
-            controller: 'MountainDetailController'                
-        }).otherwise({
+            controller: 'MountainDetailController'   
+        })
+        .otherwise({
             redirectTo: '/mountains'
         });
     
@@ -87,7 +91,9 @@ cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountains
 
 }]);
 
-cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', function($scope, $rootScope, Mountains) {
+cmr.controller('MountainListController', 
+    ['$scope', '$location', '$rootScope', '$routeParams', 'Mountains', 
+    function($scope, $location, $rootScope, $routeParams, Mountains) {
 
     $scope.focusLocation = "";
     $scope.filterProps = {};
@@ -95,7 +101,9 @@ cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', f
     $scope.filterType = 'lat';    
     $scope.filterLocation = {};
     $scope.filterReverse = true;
-    $scope.region = 'all';
+    $scope.region = Mountains.getRegionIdByRegionUrl($routeParams.state); //'all';
+
+    console.log("$scope.region", $scope.region);
 
     $scope.mountainFocus = function(id) {    
         if (id !== $scope.focusLocation) {            
@@ -107,6 +115,10 @@ cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', f
     $scope.mountainBlur = function() {
         $rootScope.$broadcast('mountainListBlur');
         $scope.focusLocation = "";
+    }
+
+    $scope.mountainDetail = function(id, region) {
+        $location.path('/mountains/' + Mountains.getRegionUrlById(region) + '/' + id);
     }
 
     $scope.regionChange = function() {
@@ -133,13 +145,16 @@ cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', f
 
     Mountains.get(function(data) {
         $scope.mountains = data;
+
+        //debug
+        $scope.regionChange();        
     });
 
 }]);
 
 cmr.controller('MountainListMapController', 
-    ['$scope', '$location', 'MountainMapMarkers', 'uiGmapGoogleMapApi', 
-    function($scope, $location, MountainMapMarkers, GoogleMapApi) {
+    ['$scope', '$location', '$routeParams', 'Mountains', 'MountainMapMarkers', 'uiGmapGoogleMapApi', 
+    function($scope, $location, $routeParams, Mountains, MountainMapMarkers, GoogleMapApi) {
 
     //TODO: move to service
     // var DEFAULT_LAT = 45.14353713591516;
@@ -150,13 +165,14 @@ cmr.controller('MountainListMapController',
     var DEFAULT_LON = -120.78863799999999;
     var DEFAULT_ZOOM = 5;
 
+    $scope.regionId = Mountains.getRegionIdByRegionUrl($routeParams.state);
     $scope.markerEvents = {
         click: markerClick,
         mouseover: markerMouseOver,
         mouseout: markerMouseOut        
     };
 
-    MountainMapMarkers.get().then(function(data) {
+    MountainMapMarkers.getRegionById($scope.regionId).then(function(data) {
 
         $scope.markers = data.data;  
         $scope.markersById = {};
@@ -223,6 +239,8 @@ cmr.controller('MountainListMapController',
 
     $scope.$on('regionChange', function(e, id) {
 
+        console.log("regionChange", id);
+
         //TODO: clean up and move to service
 
         var lat = DEFAULT_LAT;
@@ -264,7 +282,7 @@ cmr.controller('MountainListMapController',
      * handle click of a marker
      */
     function markerClick(gMarker, eventName, model) {
-        $location.path('/mountains/' + model.id);
+        $location.path('/mountains/' + Mountains.getRegionUrlById(model.region) + '/' + model.id);
         $scope.$apply();        
     }
 
@@ -311,13 +329,14 @@ cmr.factory('MountainMapMarkers', ['Mountains', '$http', function(Mountains, $ht
 		var count = 0;
 
 		for (var mtn in data) {
-			var mountain = data[mtn];
+			var mountain = data[mtn];		
 			if ((mountain.hasOwnProperty('lat')) && (mountain.hasOwnProperty('lon'))) {
 				markerData.push({
 					id: mountain.id,
 					latitude: mountain.lat,
 					longitude: mountain.lon,
 					title: mountain.name,
+					region: mountain.state,
 					show: false,
 					icon: '/images/map-marker-icon.png',
 					options: {
@@ -357,14 +376,48 @@ cmr.factory('MountainMapMarkers', ['Mountains', '$http', function(Mountains, $ht
 	// 		});
 	// }
 
+	/**
+	 * get list of mountain markers for map with the matching region id
+	 * @return {object} return an object with a "data" key
+	 */
+	function getRegionById(id) {
+		return Mountains.getRegionById(id, function(response) {
+			return {
+				data: createMarkerData(response)
+			}
+		}, function(error) {
+			throw error.status + " : " + error.data;
+		});		
+	}
+
 	/*
 	public methods
 	 */
 	return {
-		get: get	
+		get: get,
+		getRegionById: getRegionById	
 	}
 }]);
 cmr.factory('Mountains', ['$http', function($http) {
+
+	var regions = {
+		'ca': {
+			'name': 'California',
+			'url': 'california'
+		},
+		'or': {
+			'name': 'Oregon',
+			'url': 'oregon'
+		},
+		'wa': {
+			'name': 'Washington',
+			'url': 'washington'
+		},
+		'bc': {
+			'name': 'British Columbia',
+			'url': 'british+columbia'
+		}
+	};
 
 	/**
 	 * return all mountains
@@ -386,9 +439,48 @@ cmr.factory('Mountains', ['$http', function($http) {
 			})
 	}
 
+	/**
+	 * return region data for the passed id
+	 */
+	function getRegionById(id, callback) {
+		return $http.get('/api/region/' + id)
+			.then(function(response) {
+				return response.data;
+			}).then(callback);
+	}
+
+	/**
+	 * given a region id, return the associated region url (name) 
+	 */
+	function getRegionUrlById(id) {
+		return regions[id.toLowerCase()].url;
+	}
+
+	/**
+	 * given a region id, return the associated region name
+	 */
+	function getRegionNameById(id) {
+		return regions[id.toLowerCase()].name;
+	}
+
+	/**
+	 *
+	 */
+	function getRegionIdByRegionUrl(url) {
+		for (var key in regions) {
+			if (regions[key].url === url) {
+				return key;
+			}
+		}
+	}
+
     return {
     	get: get,
-    	getMountainById: getMountainById
+    	getMountainById: getMountainById,
+    	getRegionById: getRegionById,
+    	getRegionUrlById: getRegionUrlById,
+    	getRegionNameById: getRegionNameById,
+    	getRegionIdByRegionUrl: getRegionIdByRegionUrl
     }
 
 }]);	

@@ -1,4 +1,6 @@
-cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', function($scope, $rootScope, Mountains) {
+cmr.controller('MountainListController', 
+    ['$scope', '$location', '$rootScope', '$routeParams', 'Mountains', 
+    function($scope, $location, $rootScope, $routeParams, Mountains) {
 
     $scope.focusLocation = "";
     $scope.filterProps = {};
@@ -6,7 +8,9 @@ cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', f
     $scope.filterType = 'lat';    
     $scope.filterLocation = {};
     $scope.filterReverse = true;
-    $scope.region = 'all';
+    $scope.region = Mountains.getRegionIdByRegionUrl($routeParams.state); //'all';
+
+    console.log("$scope.region", $scope.region);
 
     $scope.mountainFocus = function(id) {    
         if (id !== $scope.focusLocation) {            
@@ -18,6 +22,10 @@ cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', f
     $scope.mountainBlur = function() {
         $rootScope.$broadcast('mountainListBlur');
         $scope.focusLocation = "";
+    }
+
+    $scope.mountainDetail = function(id, region) {
+        $location.path('/mountains/' + Mountains.getRegionUrlById(region) + '/' + id);
     }
 
     $scope.regionChange = function() {
@@ -44,6 +52,9 @@ cmr.controller('MountainListController', ['$scope', '$rootScope', 'Mountains', f
 
     Mountains.get(function(data) {
         $scope.mountains = data;
+
+        //debug
+        $scope.regionChange();        
     });
 
 }]);
