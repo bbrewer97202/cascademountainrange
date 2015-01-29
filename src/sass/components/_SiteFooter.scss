@@ -3,16 +3,15 @@
  ******************************************************************************/
 .SiteFooter {
 	max-width: $desktopWidth;
-	font-size: 70%;
-	color: #666;
+	font-size: 65%;
+	color: #999;
 	margin: 0 auto;
 	padding: 2em;
-	background-color: pink;
 	a {
-		color: #666;
+		color: #999;
 	}
 	p {
-		padding: 0 0 0.5em 0;
+		padding: 0 2em 0.25em 2em;
 		margin: 0;
 	}
 }
