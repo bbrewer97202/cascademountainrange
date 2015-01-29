@@ -2,7 +2,8 @@
  * globals
  ******************************************************************************/
 
-$desktop: 37.5em; //600px at 16
+$desktopBreakpoint: 37.5em; //600px at 16
+$desktopWidth: 60em;
 
 $susy: (
   columns: 12,
@@ -16,10 +17,24 @@ $susy: (
 $colorHeaderBackground: #315F6D; //#6d5536;
 $colorLabel: #e6dc4b;
 $colorCTAText: #FDF0F0;
-$colorCTABackground: #4E4C56; //#454444
-$colorActive: #C74848; //#A04D38;
+$colorCTABackground: #8B8A8C; 
+//$colorCTABackgroundFade: #707071;
+$colorCTABackgroundFade: darken($colorCTABackground, 20%);
+$colorActive: #C74848;
+$colorActiveFade: darken($colorActive, 20%);
 $colorBackground: #E0DFDC;
-$colorBackgroundAlt: #F0F0F0; //#E8E8E6;
+$colorBackgroundAlt: #F0F0F0;
+
+
+%CTABackground {
+	background: $colorCTABackground;
+	background: linear-gradient($colorCTABackground, $colorCTABackgroundFade);
+}
+
+%CTABackgroundActive {
+	background: $colorActive;
+	background: linear-gradient($colorActive, $colorActiveFade);
+}
 
 //#
 

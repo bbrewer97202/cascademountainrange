@@ -20,6 +20,7 @@ cmr.factory('MountainMapMarkers', ['Mountains', '$http', function(Mountains, $ht
 					title: mountain.name,
 					region: mountain.state,
 					show: false,
+					url: mountain.urlid,
 					icon: '/images/map-marker-icon.png',
 					options: {
 						boxClass:"mountain-marker-window",

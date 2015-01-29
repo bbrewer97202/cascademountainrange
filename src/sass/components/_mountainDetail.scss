@@ -3,14 +3,14 @@
  ******************************************************************************/
 .MountainDetail {
     padding: 0.6em;
-    @include susy-breakpoint($desktop, $susy) {
+    @include susy-breakpoint($desktopBreakpoint, $susy) {
         padding: 1em;        
     }
 } 
 
 /* info */
 .MountainInfo {
-    @include susy-breakpoint($desktop, $susy) {
+    @include susy-breakpoint($desktopBreakpoint, $susy) {
         @include span(6 of 12);    
     }
 }
@@ -23,7 +23,7 @@
 
 /* map */
 .MountainDetailMap {
-    @include susy-breakpoint($desktop, $susy) {
+    @include susy-breakpoint($desktopBreakpoint, $susy) {
         @include span(last 6 of 12);    
     }
 
@@ -36,7 +36,7 @@
 
 /* photo */
 .MountainPhotos {
-    @include susy-breakpoint($desktop, $susy) {
+    @include susy-breakpoint($desktopBreakpoint, $susy) {
         @include span(6 of 12);    
     }
 }

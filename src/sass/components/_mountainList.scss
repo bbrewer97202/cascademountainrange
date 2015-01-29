@@ -2,13 +2,17 @@
  * MountainList
  ******************************************************************************/
 .MountainList {
-    @include susy-breakpoint($desktop, $susy) {
-        @include span(last 7 of 12);    
+    @include susy-breakpoint($desktopBreakpoint, $susy) {
+        @include span(last 6 of 12);    
     }        
     a {
         text-decoration: underline;
         cursor: pointer;
     }
+}
+
+.MountainList-headline {
+     margin-top: 0.2em;
 }
 
 .mountainListFilter li {
@@ -27,15 +31,14 @@
     padding: 0.2em;
 }
 
-.MountainListTable thead {
-    
+.MountainListTable thead {    
     width: 100%;
 
     &.name [data-filter-type="name"],
     &.lat [data-filter-type="lat"],
     &.elevation [data-filter-type="elevation"],
     &.state [data-filter-type="state"] {  
-        background-color: $colorActive;  
+        @extend %CTABackgroundActive; 
         &:after {
             content: "";
             display: inline-block;
@@ -58,6 +61,7 @@
 }
 
 .MountainListTable-row {
+    cursor: pointer;
     &:hover {
         background-color: rgba($colorHeaderBackground, 0.2);
     }
@@ -67,7 +71,7 @@
 .MountainListTable-cell {    
     vertical-align: top;
     font-size: 80%;
-    @include susy-breakpoint($desktop, $susy) {
+    @include susy-breakpoint($desktopBreakpoint, $susy) {
         padding: 0.3em 0.625em;        
     }
 }
@@ -79,12 +83,7 @@
     user-select: none;
     color: $colorCTAText;
     padding: 0.5em;
-    background-color: $colorCTABackground;
-    // &:after {
-    //     content: "";
-    //     width: 0.76em;
-    //     display: inline-block;
-    // }
+    @extend %CTABackground;
 }
 
 .MountainListTable-cell {
@@ -92,20 +91,19 @@
 }
 
 .MountainListTable-head_col1,
-.MountainListTable-cell_col1,
-.MountainListTable-head_col3,
-.MountainListTable-cell_col3 {
-    text-align: left;
+.MountainListTable-cell_col1 {
+    width: 45%;
 }
 
 .MountainListTable-head_col2,
-.MountainListTable-cell_col2 {
-    text-align: center;
+.MountainListTable-cell_col2, 
+.MountainListTable-head_col1,
+.MountainListTable-cell_col1 {
+    text-align: left;
 }
 
-
-.MountainListTable-head_col4,
-.MountainListTable-cell_col4 {
+.MountainListTable-head_col3,
+.MountainListTable-cell_col3 {
     text-align: right;
 }
 
@@ -114,7 +112,7 @@
     border-bottom-left-radius: 0.45em;
 }
 
-.MountainListTable-head_col4 {
+.MountainListTable-head_col3 {
     border-top-right-radius: 0.45em;
     border-bottom-right-radius: 0.45em;
 }

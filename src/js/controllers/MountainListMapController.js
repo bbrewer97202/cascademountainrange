@@ -3,10 +3,6 @@ cmr.controller('MountainListMapController',
     function($scope, $location, $routeParams, Mountains, MountainMapMarkers, GoogleMapApi) {
 
     //TODO: move to service
-    // var DEFAULT_LAT = 45.14353713591516;
-    // var DEFAULT_LON = -121.955078125;
-    // var DEFAULT_ZOOM = 6;
-
     var DEFAULT_LAT = 44.087029720084644;
     var DEFAULT_LON = -120.78863799999999;
     var DEFAULT_ZOOM = 5;
@@ -37,15 +33,7 @@ cmr.controller('MountainListMapController',
             $scope.googleVersion = maps.version;
             maps.visualRefresh = true;
 
-            //debug
-            $scope.geocoder = new google.maps.Geocoder();
-
             $scope.map = {
-                center: {
-                    latitude: DEFAULT_LAT,
-                    longitude: DEFAULT_LON
-                },
-                zoom: DEFAULT_ZOOM,
                 options: {
                     mapTypeId: google.maps.MapTypeId.TERRAIN,
                     streetViewControl: false,
@@ -54,15 +42,18 @@ cmr.controller('MountainListMapController',
                     zoomControl: true,
                     zoomControlOptions: {
                        style: google.maps.ZoomControlStyle.SMALL
-                    }                    
-                },
-                events: {                
-                    dragend: function() {
-                        //TODO: this is only for debugging
-                        console.log("drag end", $scope.map);
-                    }
-                }     
+                    }        
+                }
             };
+
+            regionUpdate($scope.regionId);
+
+            //TODO: this is only for debugging
+            // $scope.map.events = {                
+            //     dragend: function() {
+            //         console.log("drag end", $scope.map);
+            //     }
+            // };
         });
     });    
 
@@ -83,9 +74,44 @@ cmr.controller('MountainListMapController',
         markerUnfocus($scope.markerFocusedById);
     });
 
-    $scope.$on('regionChange', function(e, id) {
+    /**
+     * handle click of a marker
+     */
+    function markerClick(gMarker, eventName, model) {
+        $location.path('/mountains/' + Mountains.getRegionUrlById(model.region) + '/' + model.id);
+        $scope.$apply();        
+    }
 
-        console.log("regionChange", id);
+    /**
+     * handle mouseover of a marker
+     */
+    function markerMouseOver(gMarker, eventName, model) {
+        model.show = true;
+        $scope.$apply();
+    }
+
+    /**
+     * handle mouseout event on a marker
+     */
+    function markerMouseOut(gMarker, eventName, model) {
+        model.show = false;
+        $scope.$apply();
+    }
+
+    /**
+     * turn off a window/label of a marker for the passed id
+     */
+    function markerUnfocus(id) {
+        if (typeof id !== 'undefined') {
+            $scope.markers[$scope.markersById[id]].show = false;
+            $scope.markerFocusedById = undefined;
+        }
+    }
+
+    /**
+     * 
+     */
+    function regionUpdate(id) {
 
         //TODO: clean up and move to service
 
@@ -122,40 +148,9 @@ cmr.controller('MountainListMapController',
             longitude: lon
         };
         $scope.map.zoom = zoom;
-    });
 
-    /**
-     * handle click of a marker
-     */
-    function markerClick(gMarker, eventName, model) {
-        $location.path('/mountains/' + Mountains.getRegionUrlById(model.region) + '/' + model.id);
-        $scope.$apply();        
-    }
-
-    /**
-     * handle mouseover of a marker
-     */
-    function markerMouseOver(gMarker, eventName, model) {
-        model.show = true;
-        $scope.$apply();
-    }
-
-    /**
-     * handle mouseout event on a marker
-     */
-    function markerMouseOut(gMarker, eventName, model) {
-        model.show = false;
-        $scope.$apply();
-    }
-
-    /**
-     * turn off a window/label of a marker for the passed id
-     */
-    function markerUnfocus(id) {
-        if (typeof id !== 'undefined') {
-            $scope.markers[$scope.markersById[id]].show = false;
-            $scope.markerFocusedById = undefined;
-        }
+        //debug
+        // console.log("regionUpdate", id, $scope.map);        
     }
 
 }]);

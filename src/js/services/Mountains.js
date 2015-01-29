@@ -3,21 +3,26 @@ cmr.factory('Mountains', ['$http', function($http) {
 	var regions = {
 		'ca': {
 			'name': 'California',
-			'url': 'california'
 		},
 		'or': {
 			'name': 'Oregon',
-			'url': 'oregon'
 		},
 		'wa': {
 			'name': 'Washington',
-			'url': 'washington'
-		},
+		},		
 		'bc': {
-			'name': 'British Columbia',
-			'url': 'british+columbia'
+			'name': 'British Columbia'
 		}
 	};
+
+	/**
+	 * 
+	 */
+	function getUrlVersionOfName(name) {
+		name = name.toLowerCase();
+		name = name.replace(/ /g, '+');
+		return name;
+	}
 
 	/**
 	 * return all mountains
@@ -40,6 +45,13 @@ cmr.factory('Mountains', ['$http', function($http) {
 	}
 
 	/**
+	 * 
+	 */
+	function getMountainUrlByName(name) {
+		return getUrlVersionOfName(name);
+	}
+
+	/**
 	 * return region data for the passed id
 	 */
 	function getRegionById(id, callback) {
@@ -53,7 +65,7 @@ cmr.factory('Mountains', ['$http', function($http) {
 	 * given a region id, return the associated region url (name) 
 	 */
 	function getRegionUrlById(id) {
-		return regions[id.toLowerCase()].url;
+		return getUrlVersionOfName(regions[id.toLowerCase()].name);
 	}
 
 	/**
@@ -64,11 +76,23 @@ cmr.factory('Mountains', ['$http', function($http) {
 	}
 
 	/**
+	 * given the url representation of a region, return the formal printable name of the region
+	 */
+	function getRegionNameByUrl(url) {
+		var name = '';
+		var words = url.split('+');
+		for (var i=0; i < words.length; i++) {
+			name += words[i].charAt(0).toUpperCase() + words[i].slice(1) + ' ';
+		}
+		return name;
+	}
+
+	/**
 	 *
 	 */
 	function getRegionIdByRegionUrl(url) {
 		for (var key in regions) {
-			if (regions[key].url === url) {
+			if (getUrlVersionOfName(regions[key].name) === url) {
 				return key;
 			}
 		}
@@ -77,10 +101,12 @@ cmr.factory('Mountains', ['$http', function($http) {
     return {
     	get: get,
     	getMountainById: getMountainById,
+    	getMountainUrlByName: getMountainUrlByName,
     	getRegionById: getRegionById,
     	getRegionUrlById: getRegionUrlById,
     	getRegionNameById: getRegionNameById,
-    	getRegionIdByRegionUrl: getRegionIdByRegionUrl
+    	getRegionIdByRegionUrl: getRegionIdByRegionUrl,
+    	getRegionNameByUrl: getRegionNameByUrl
     }
 
 }]);	

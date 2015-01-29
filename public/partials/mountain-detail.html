@@ -1,14 +1,11 @@
-<div class="Breadcrumb">
-    <a href="/#mountains">Home</a> : 
-    <a href="/#mountains/">{{stateFormat()}}</a> : 
-    {{mountain.name}}
-</div>
+
+<cmr-breadcrumb data="breadcrumb"></cmr-breadcrumb>
 
 <article class="MountainDetail">
 
     <section class="MountainInfo">
         <h1 class="MountainInfo-name">{{mountain.name}}</h1>
-        <p>Location: {{stateFormat()}}</p>
+        <p>Location: {{region}}</p>
         <p>Elevation: {{mountain.elevation | number}} feet</p>
         <p>Last Eruption: {{mountain.eruption}}</p>
     </section>
@@ -18,7 +15,7 @@
         <div cmr-photo photo="mountain.photos[1]"></div>
     </section>
 
-    <div class="MountainDetailMap">
+<!--     <div class="MountainDetailMap">
         <ui-gmap-google-map 
             center="map.center"
             zoom="map.zoom"
@@ -29,7 +26,7 @@
             pan="true"
             control="map.control">
         </ui-gmap-google-map>        
-    </div>
+    </div> -->
 
 </article>
 

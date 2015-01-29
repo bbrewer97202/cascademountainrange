@@ -1,5 +1,10 @@
 cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountains', function($scope, $routeParams, Mountains) {
 
+    $scope.breadcrumb = {
+        regionName: '',
+        regionUrl: '',
+        mountainName: ''
+    }
     $scope.mountain = {
         photos: []
     }
@@ -8,16 +13,24 @@ cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountains
     Mountains.getMountainById($routeParams.id).then(function(data) {
 
         $scope.mountain = data;
-        $scope.map = {
-            center: {
-                latitude: $scope.mountain.lat,
-                longitude: $scope.mountain.lon
-            },
-            zoom: 11,
-            options: {
-                mapTypeId: google.maps.MapTypeId.TERRAIN 
-            }
+        $scope.region = Mountains.getRegionNameById(data.state);
+
+        $scope.breadcrumb = {
+            regionUrl: Mountains.getRegionUrlById(data.state),
+            regionName: $scope.region,
+            mountainName: data.name
         }
+
+        // $scope.map = {
+        //     center: {
+        //         latitude: $scope.mountain.lat,
+        //         longitude: $scope.mountain.lon
+        //     },
+        //     zoom: 11,
+        //     options: {
+        //         mapTypeId: google.maps.MapTypeId.TERRAIN 
+        //     }
+        // }
     });
 
     //default map
@@ -30,27 +43,14 @@ cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountains
         zoom: 11
     };
 
-    //TODO: handle Canada
     //TODO: make service or filter
-    $scope.stateFormat = function() {
-
-        if ($scope.mountain) {
-            switch ($scope.mountain.state) {
-                case 'CA':
-                    return 'California';
-                    break;
-                case 'OR':
-                    return 'Oregon';
-                    break;
-                case 'WA':
-                    return 'Washington';
-                    break;
-                default:
-                    return ''
-            }
-        } else {
-            return '';
-        }
-    }
+    //TODO: only used by breadcrumb? move to breadcrumb directive
+    // $scope.stateFormat = function() {
+    //     if ($scope.mountain.state) {
+    //        return Mountains.getRegionNameById($scope.mountain.state); 
+    //     } else {
+    //         return '';
+    //     }
+    // }
 
 }]);

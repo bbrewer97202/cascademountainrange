@@ -3,13 +3,13 @@
  ******************************************************************************/
 .mountainListMap {    
     position: relative;
-    @include susy-breakpoint($desktop, $susy) {        
+    @include susy-breakpoint($desktopBreakpoint, $susy) {        
         @include span(5 of 12);    
     }
 
     .angular-google-map-container {
         height: 400px;
-        @include susy-breakpoint($desktop, $susy) {
+        @include susy-breakpoint($desktopBreakpoint, $susy) {
             height: 560px;    
         }        
     }

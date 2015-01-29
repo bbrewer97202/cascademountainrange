@@ -9,11 +9,25 @@
 <body>
 
     <div class="contents">
-        <header>
-            <h1><a href="/#mountains">Cascade Mountain Range</a></h1>
+        <header class="SiteHeader">
+            <h1 class="SiteHeader-homelink"><a href="/#/">Cascade Mountain Range</a></h1>
+            <nav class="SiteNav" ng-controller="NavigationController">
+                <ul class="SiteNav-list">
+                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/british+columbia')}"><a href="/#/british+columbia">British Columbia</a></li>
+                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/washington')}"><a href="/#/washington">Washington</a></li>
+                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/oregon')}"><a href="/#/oregon">Oregon</a></li>
+                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/california')}"><a href="/#/california">California</a></li>
+                </ul>
+            </nav>
         </header>
         <div ng-view></div>
     </div>
+
+    <footer class="SiteFooter">
+        <p>&copy; 2015 cascademountainrange.com. All rights reserved.</p>
+        <p>All data and statistics on this site courtesy of <a href="http://en.wikipedia.org/wiki/Wikipedia" target="_blank">Wikipedia</a></p>
+        <p>Source code for this site is <a href="https://github.com/bbrewer97202/cascademountainrange" target="_blank">available on GitHub</a> under the MIT license.</p>
+    </footer>
 
     <script type="text/javascript" src="js/vendor.js"></script>
     <script type="text/javascript" src="js/script.js"></script>

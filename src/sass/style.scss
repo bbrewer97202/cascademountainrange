@@ -1,15 +1,22 @@
+//libraries
 @import "breakpoint";
 @import "susy";
 
+//framework
 @import "vendor/normalize";
-
 @import "components/globals";
 @import "components/framework";
-@import "components/header";
-@import "components/Breadcrumb";
+
+//core components
+@import "components/SiteHeader";
+@import "components/SiteNav";
+@import "components/SiteFooter";
 @import "components/homepage";
 @import "components/RegionSelector";
 @import "components/MountainList";
 @import "components/mountainListMap";
 @import "components/mountainDetail";
+
+//directives
+@import "components/Breadcrumb";
 @import "components/cmrPhoto";

@@ -8,9 +8,8 @@ cmr.controller('MountainListController',
     $scope.filterType = 'lat';    
     $scope.filterLocation = {};
     $scope.filterReverse = true;
-    $scope.region = Mountains.getRegionIdByRegionUrl($routeParams.state); //'all';
-
-    console.log("$scope.region", $scope.region);
+    $scope.region = Mountains.getRegionIdByRegionUrl($routeParams.state);
+    $scope.regionName = Mountains.getRegionNameByUrl($routeParams.state);
 
     $scope.mountainFocus = function(id) {    
         if (id !== $scope.focusLocation) {            
@@ -24,8 +23,8 @@ cmr.controller('MountainListController',
         $scope.focusLocation = "";
     }
 
-    $scope.mountainDetail = function(id, region) {
-        $location.path('/mountains/' + Mountains.getRegionUrlById(region) + '/' + id);
+    $scope.mountainDetail = function(name, region) {
+        $location.path('/' + Mountains.getRegionUrlById(region) + '/' + name);
     }
 
     $scope.regionChange = function() {

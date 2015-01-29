@@ -1,19 +1,22 @@
 /*******************************************************************************
  * header
  ******************************************************************************/
-header {
+.SiteHeader {
     box-shadow: 0 3px 6px -1px rgba(36, 36, 33, 0.4);
-    background-color: $colorHeaderBackground;
-    h1 {
-        margin: 0;
-        font-size: 1em;
-        @include breakpoint($desktop) {
-            font-size: 2em;
-        }        
-    }
+    background: $colorHeaderBackground;
+    background: radial-gradient(lighten($colorHeaderBackground, 2%), darken($colorHeaderBackground, 6%));
+}
+
+.SiteHeader-homelink {
+    margin: 0;
+    font-size: 1em;
+    color: $colorLabel;
+    @include breakpoint($desktopBreakpoint) {
+        font-size: 2em;
+    }        
+
     a {
         display: block;
-        font-family: 'Questrial', sans-serif;
         color: $colorLabel;
         font-weight: normal;
         margin: 0;
@@ -21,10 +24,10 @@ header {
         padding: 0.35em;
         text-align: center;
 
-        @include breakpoint($desktop) {
+        @include breakpoint($desktopBreakpoint) {
+            //padding: 0.6em 0.6em 0.4em 0.6em;
             padding: 0.6em;
             text-align: left;
         }
-    }  
-}
-
+    }
+}  

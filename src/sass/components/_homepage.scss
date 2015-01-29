@@ -3,7 +3,7 @@
  ******************************************************************************/
 .homepage {    
     padding: 0.6em;
-    @include susy-breakpoint($desktop, $susy) {
+    @include susy-breakpoint($desktopBreakpoint, $susy) {
         padding: 1em;        
     }
 }

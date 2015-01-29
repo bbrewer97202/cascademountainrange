@@ -399,6 +399,16 @@ th {
 /*******************************************************************************
  * globals
  ******************************************************************************/
+.SiteNav-link, .MountainListTable-head {
+  background: #8B8A8C;
+  background: linear-gradient(#8B8A8C, #585759);
+}
+
+.SiteNav-link--active, .MountainListTable thead.name [data-filter-type="name"], .MountainListTable thead.lat [data-filter-type="lat"], .MountainListTable thead.elevation [data-filter-type="elevation"], .MountainListTable thead.state [data-filter-type="state"] {
+  background: #C74848;
+  background: linear-gradient(#C74848, #812828);
+}
+
 html, body {
   font-family: sans-serif;
   font-size: 16px;
@@ -413,7 +423,7 @@ html, body {
   margin-right: auto;
   background-color: #F0F0F0;
   border-radius: 0px 0px 5px 5px;
-  padding-bottom: 1em;
+  padding-bottom: 1.5em;
   box-shadow: 3px 3px 6px -1px rgba(36, 36, 33, 0.2), -3px 3px 6px -1px rgba(36, 36, 33, 0.2);
 }
 .contents:after {
@@ -422,25 +432,32 @@ html, body {
   clear: both;
 }
 
+h1, h2, h3, h4, h5 {
+  font-family: 'Questrial', sans-serif;
+  font-weight: normal;
+}
+
 /*******************************************************************************
  * header
  ******************************************************************************/
-header {
+.SiteHeader {
   box-shadow: 0 3px 6px -1px rgba(36, 36, 33, 0.4);
-  background-color: #315F6D;
+  background: #315F6D;
+  background: radial-gradient(#346574, #284d58);
 }
-header h1 {
+
+.SiteHeader-homelink {
   margin: 0;
   font-size: 1em;
+  color: #e6dc4b;
 }
 @media (min-width: 37.5em) {
-  header h1 {
+  .SiteHeader-homelink {
     font-size: 2em;
   }
 }
-header a {
+.SiteHeader-homelink a {
   display: block;
-  font-family: 'Questrial', sans-serif;
   color: #e6dc4b;
   font-weight: normal;
   margin: 0;
@@ -449,23 +466,59 @@ header a {
   text-align: center;
 }
 @media (min-width: 37.5em) {
-  header a {
+  .SiteHeader-homelink a {
     padding: 0.6em;
     text-align: left;
   }
 }
 
-.Breadcrumb {
-  padding: 0.6rem;
-  font-size: 70%;
-}
+/*******************************************************************************
+ * nav
+ ******************************************************************************/
 @media (min-width: 37.5em) {
-  .Breadcrumb {
-    padding: 2rem;
+  .SiteNav {
+    margin-top: -0.1em;
   }
 }
-.Breadcrumb a {
-  color: #333;
+
+.SiteNav-list {
+  list-style-type: none;
+  margin: 0 0 0 2.2em;
+  padding: 0;
+  overflow: hidden;
+}
+
+.SiteNav-link {
+  margin: 0;
+  padding: 0;
+  border-top-left-radius: 0.4em;
+  border-top-right-radius: 0.4em;
+  display: inline-block;
+}
+.SiteNav-link a {
+  color: #FDF0F0;
+  text-decoration: none;
+  display: block;
+  padding: 0.6em 0.8em 0.5em 0.8em;
+}
+
+/*******************************************************************************
+ * SiteFooter
+ ******************************************************************************/
+.SiteFooter {
+  max-width: 60em;
+  font-size: 70%;
+  color: #666;
+  margin: 0 auto;
+  padding: 2em;
+  background-color: pink;
+}
+.SiteFooter a {
+  color: #666;
+}
+.SiteFooter p {
+  padding: 0 0 0.5em 0;
+  margin: 0;
 }
 
 /*******************************************************************************
@@ -518,7 +571,7 @@ header a {
   display: block;
   border-radius: 0.5em;
   color: #FDF0F0;
-  background-color: #4E4C56;
+  background-color: #8B8A8C;
   padding: 0.9em 0.9em;
   cursor: pointer;
 }
@@ -536,7 +589,7 @@ header a {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    width: 58.33333%;
+    width: 50%;
     float: right;
     padding-left: 0.83333%;
     padding-right: 0.83333%;
@@ -545,6 +598,10 @@ header a {
 .MountainList a {
   text-decoration: underline;
   cursor: pointer;
+}
+
+.MountainList-headline {
+  margin-top: 0.2em;
 }
 
 .mountainListFilter li {
@@ -566,9 +623,6 @@ header a {
 .MountainListTable thead {
   width: 100%;
 }
-.MountainListTable thead.name [data-filter-type="name"], .MountainListTable thead.lat [data-filter-type="lat"], .MountainListTable thead.elevation [data-filter-type="elevation"], .MountainListTable thead.state [data-filter-type="state"] {
-  background-color: #C74848;
-}
 .MountainListTable thead.name [data-filter-type="name"]:after, .MountainListTable thead.lat [data-filter-type="lat"]:after, .MountainListTable thead.elevation [data-filter-type="elevation"]:after, .MountainListTable thead.state [data-filter-type="state"]:after {
   content: "";
   display: inline-block;
@@ -585,6 +639,9 @@ header a {
   border-bottom: 0;
 }
 
+.MountainListTable-row {
+  cursor: pointer;
+}
 .MountainListTable-row:hover {
   background-color: rgba(49, 95, 109, 0.2);
 }
@@ -608,7 +665,6 @@ header a {
   user-select: none;
   color: #FDF0F0;
   padding: 0.5em;
-  background-color: #4E4C56;
 }
 
 .MountainListTable-cell {
@@ -616,19 +672,19 @@ header a {
 }
 
 .MountainListTable-head_col1,
-.MountainListTable-cell_col1,
-.MountainListTable-head_col3,
-.MountainListTable-cell_col3 {
-  text-align: left;
+.MountainListTable-cell_col1 {
+  width: 45%;
 }
 
 .MountainListTable-head_col2,
-.MountainListTable-cell_col2 {
-  text-align: center;
+.MountainListTable-cell_col2,
+.MountainListTable-head_col1,
+.MountainListTable-cell_col1 {
+  text-align: left;
 }
 
-.MountainListTable-head_col4,
-.MountainListTable-cell_col4 {
+.MountainListTable-head_col3,
+.MountainListTable-cell_col3 {
   text-align: right;
 }
 
@@ -637,7 +693,7 @@ header a {
   border-bottom-left-radius: 0.45em;
 }
 
-.MountainListTable-head_col4 {
+.MountainListTable-head_col3 {
   border-top-right-radius: 0.45em;
   border-bottom-right-radius: 0.45em;
 }
@@ -766,6 +822,19 @@ header a {
     padding-left: 0.83333%;
     padding-right: 0.83333%;
   }
+}
+
+.Breadcrumb {
+  padding: 0.6rem;
+  font-size: 70%;
+}
+@media (min-width: 37.5em) {
+  .Breadcrumb {
+    padding: 2rem;
+  }
+}
+.Breadcrumb a {
+  color: #333;
 }
 
 /*******************************************************************************
