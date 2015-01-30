@@ -9,7 +9,7 @@
 
 .SiteHeader-homelink {
     margin: 0;
-    font-size: 1em;
+    font-size: 1.3em;
     color: $colorLabel;
     @include breakpoint($desktopBreakpoint) {
         font-size: 2em;
@@ -21,11 +21,10 @@
         font-weight: normal;
         margin: 0;
         text-decoration: none;
-        padding: 0.35em;
-        text-align: center;
+        padding: 0.65em 0 0.85em 1em;
+        text-shadow: lighten(#000000, 15%) 1px 1px;
 
         @include breakpoint($desktopBreakpoint) {
-            //padding: 0.6em 0.6em 0.4em 0.6em;
             padding: 0.6em;
             text-align: left;
         }

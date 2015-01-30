@@ -3,6 +3,7 @@ html, body {
     font-size: 16px;
     margin: 0;
     background-color: $colorBackground;
+    color: $colorBaseText;
 }
 
 .contents {
@@ -14,7 +15,18 @@ html, body {
     box-shadow: 3px 3px 6px -1px rgba(36,36,33,0.20), -3px 3px 6px -1px rgba(36,36,33,0.20);
 }
 
+.PageContent {
+    padding: 0.6em;
+    @include susy-breakpoint($desktopBreakpoint, $susy) {
+        padding: 2em 1em;
+    }
+}
+
 h1,h2,h3,h4,h5 {
     font-family: 'Questrial', sans-serif;    
     font-weight: normal;    
+}
+
+a {
+    color: $colorBaseText;
 }

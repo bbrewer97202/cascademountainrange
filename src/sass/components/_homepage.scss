@@ -1,9 +1,55 @@
 /*******************************************************************************
- * homepage
+ * Homepage
  ******************************************************************************/
-.homepage {    
-    padding: 0.6em;
+.Homepage {
+	@include breakpoint($desktopBreakpoint) {
+		padding: 0 1em;
+	}
+}
+
+.HomepageIntro {
+	padding: 1em;
+
+	p {
+		margin-top: 0;
+	}
+
     @include susy-breakpoint($desktopBreakpoint, $susy) {
-        padding: 1em;        
-    }
+		@include span(6 of 12);  	
+		padding: 0;
+	}	
+}
+
+.HomepageIntro-nav {
+	ul {
+		padding: 0 0 0 1em;
+		margin: 0;
+		list-style-type: none;
+	}
+	li {
+		margin: 0;
+		padding: 0 0 0.5em 0;
+	}
+}
+
+.HomepageImagery {
+	padding: 0 1em;	
+    @include susy-breakpoint($desktopBreakpoint, $susy) {
+		@include span(last 5 of 12);  	
+		padding: 0;
+	}		
+}
+
+.HomepageImagery-image {
+	width: 100%;
+	height: auto;
+}
+
+.HomepageImagery-caption {
+	font-size: 60%;
+	line-height: 110%;
+	color: $colorBaseText;
+	padding: 0;
+	margin: 0;
+	@include word-wrap;
 }

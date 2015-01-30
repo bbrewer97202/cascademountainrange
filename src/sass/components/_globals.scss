@@ -18,12 +18,12 @@ $colorHeaderBackground: #315F6D; //#6d5536;
 $colorLabel: #e6dc4b;
 $colorCTAText: #FDF0F0;
 $colorCTABackground: #8B8A8C; 
-//$colorCTABackgroundFade: #707071;
 $colorCTABackgroundFade: darken($colorCTABackground, 20%);
 $colorActive: #C74848;
 $colorActiveFade: darken($colorActive, 20%);
 $colorBackground: #E0DFDC;
 $colorBackgroundAlt: #F0F0F0;
+$colorBaseText: #666;
 
 
 %CTABackground {

@@ -78,7 +78,7 @@ cmr.controller('MountainListMapController',
      * handle click of a marker
      */
     function markerClick(gMarker, eventName, model) {
-        $location.path('/mountains/' + Mountains.getRegionUrlById(model.region) + '/' + model.id);
+        $location.path('/' + Mountains.getRegionUrlById(model.region) + '/' + model.url);
         $scope.$apply();        
     }
 

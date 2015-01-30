@@ -231,7 +231,7 @@ cmr.controller('MountainListMapController',
      * handle click of a marker
      */
     function markerClick(gMarker, eventName, model) {
-        $location.path('/mountains/' + Mountains.getRegionUrlById(model.region) + '/' + model.id);
+        $location.path('/' + Mountains.getRegionUrlById(model.region) + '/' + model.url);
         $scope.$apply();        
     }
 
@@ -312,8 +312,15 @@ cmr.controller('MountainListMapController',
 
 cmr.controller('NavigationController', ['$scope', '$location', function($scope, $location) {
 	
+	$scope.isMobileMenuOpen = false;
+
 	$scope.isActive = function(route) {
 		return ($location.path().indexOf(route) >= 0);
+	}
+
+	$scope.openMenu = function() {
+		console.log("openMenu");
+		$scope.isMobileMenuOpen = !$scope.isMobileMenuOpen;
 	}
 
 }]);

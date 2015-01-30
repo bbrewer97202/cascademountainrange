@@ -12,7 +12,10 @@
 }
 
 .MountainList-headline {
-     margin-top: 0.2em;
+    margin-top: 0.4em;
+    @include breakpoint($desktopBreakpoint) {
+        margin-top: 0;
+    }
 }
 
 .mountainListFilter li {
@@ -87,7 +90,10 @@
 }
 
 .MountainListTable-cell {
-    padding: 0.3em 0.5em;    
+    padding: 0.7em 0.5em;    
+    @include breakpoint($desktopBreakpoint) {
+        padding: 0.3em 0.5em;    
+    }
 }
 
 .MountainListTable-head_col1,

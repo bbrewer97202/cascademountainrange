@@ -5,13 +5,14 @@
 //framework
 @import "vendor/normalize";
 @import "components/globals";
+@import "components/mixins";
 @import "components/framework";
 
 //core components
 @import "components/SiteHeader";
 @import "components/SiteNav";
 @import "components/SiteFooter";
-@import "components/homepage";
+@import "components/Homepage";
 @import "components/RegionSelector";
 @import "components/MountainList";
 @import "components/mountainListMap";
