@@ -1,5 +1,6 @@
 {
   "name": "cascademountainrange",
+  "version": "0.1.2",
   "main": "server.js",
   "dependencies": {
     "express": "~4.6.1",

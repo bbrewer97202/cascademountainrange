@@ -8,7 +8,7 @@ cmr.directive('cmrPhoto', function() {
         replace: 'true',
         link: function(scope, element, attrs) {
 
-            scope.PATH = 'https://s3-us-west-2.amazonaws.com/cascademountainrange/';
+            scope.PATH = '';
 
             //default values are empty
             scope.image = null;

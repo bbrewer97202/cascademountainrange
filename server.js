@@ -10,9 +10,8 @@ var mongoose = require('mongoose');
 var mongoConnect = process.env.MONGO_CONNECT || require('./config.json').mongo;
 
 //configure middleware
-app.use(bodyParser());
-
-var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+app.use(bodyParser.json());
+app.set('port', (process.env.PORT || 8080));
 
 //database
 //todo: connection failure
@@ -25,5 +24,7 @@ var mountainsRoute = require('./api/routes/mountains')(app, Mountain);
 //static files
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.listen(port);
-console.log("starting api on port " + port);
+app.listen(app.get('port'), function() {
+	console.log("starting api on port " + app.get('port'));	
+});
+
