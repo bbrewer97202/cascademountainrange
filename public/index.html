@@ -9,15 +9,15 @@
 <body>
 
     <div class="contents">
-        <header class="SiteHeader">
+        <header class="SiteHeader" ng-controller="NavigationController">
             <h1 class="SiteHeader-homelink"><a href="/#/">Cascade Mountain Range</a></h1>
-            <nav class="SiteNav" ng-controller="NavigationController">
-                <button class="SiteNav-mobilemenu" ng-click="openMenu();"></button>
-                <ul class="SiteNav-list" ng-class="{'SiteNav-list--open': isMobileMenuOpen}">
-                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/british+columbia')}"><a href="/#/british+columbia">British Columbia</a></li>
-                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/washington')}"><a href="/#/washington">Washington</a></li>
-                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/oregon')}"><a href="/#/oregon">Oregon</a></li>
-                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/california')}"><a href="/#/california">California</a></li>
+            <button class="SiteNav-mobilemenu" ng-click="openMenu();"></button>
+            <nav class="SiteNav" ng-class="{'SiteNav--open': isMobileMenuOpen}">                
+                <ul class="SiteNav-list">
+                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/british+columbia')}"><a href="/#/british+columbia" ng-click="closeMobileMenu();">British Columbia</a></li>
+                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/washington')}"><a href="/#/washington" ng-click="closeMobileMenu();">Washington</a></li>
+                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/oregon')}"><a href="/#/oregon" ng-click="closeMobileMenu();">Oregon</a></li>
+                    <li class="SiteNav-link" ng-class="{'SiteNav-link--active': isActive('/california')}"><a href="/#/california" ng-click="closeMobileMenu();">California</a></li>
                 </ul>
             </nav>
         </header>

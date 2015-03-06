@@ -17,14 +17,19 @@ html, body {
 
 .PageContent {
     padding: 0.6em;
+    margin-top: 3rem;
     @include susy-breakpoint($desktopBreakpoint, $susy) {
         padding: 2em 1em;
+        margin-top: 0;
     }
 }
 
 h1,h2,h3,h4,h5 {
-    font-family: 'Questrial', sans-serif;    
+    font-family: sans-serif;    
     font-weight: normal;    
+    @include susy-breakpoint($desktopBreakpoint, $susy) {
+        font-family: 'Questrial', sans-serif;    
+    }    
 }
 
 a {

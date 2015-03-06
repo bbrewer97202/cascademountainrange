@@ -2,11 +2,6 @@ cmr.controller('MountainListMapController',
     ['$scope', '$location', '$routeParams', 'Mountains', 'MountainMapMarkers', 'uiGmapGoogleMapApi', 
     function($scope, $location, $routeParams, Mountains, MountainMapMarkers, GoogleMapApi) {
 
-    //TODO: move to service
-    var DEFAULT_LAT = 44.087029720084644;
-    var DEFAULT_LON = -120.78863799999999;
-    var DEFAULT_ZOOM = 5;
-
     $scope.regionId = Mountains.getRegionIdByRegionUrl($routeParams.state);
     $scope.markerEvents = {
         click: markerClick,
@@ -109,50 +104,20 @@ cmr.controller('MountainListMapController',
     }
 
     /**
-     * 
+     * update the map to center and zoom on the region associated with the passed id
      */
     function regionUpdate(id) {
 
-        //TODO: clean up and move to service
-
-        var lat = DEFAULT_LAT;
-        var lon = DEFAULT_LON;
-        var zoom = DEFAULT_ZOOM;
-
-        switch (id) {
-            case 'or':
-                lat = 44.06414336303867;
-                lon = -121.88916015625;
-                zoom = 7;
-                break;
-            case 'wa':
-                lat = 47.38369696135246;
-                lon = -121.1640625;
-                zoom = 7;
-                break; 
-            case 'ca':
-                lat = 39.793490785895294;
-                lon = -121.39048385620117;
-                zoom = 7;
-                break; 
-            case 'bc':
-                lat = 49.66450788807946;
-                lon = -121.44601631164551;
-                zoom = 8;
-                break;                 
-            default: 
-        }
-
+        //center map at coords associated with passed region id or fallback to defaults
         $scope.map.center = {
-            latitude: lat,
-            longitude: lon
+            latitude: MountainMapMarkers.constants[id].LAT || MountainMapMarkers.constants.LAT,
+            longitude: MountainMapMarkers.constants[id].LON || MountainMapMarkers.constants.LON
         };
-        $scope.map.zoom = zoom;
+        $scope.map.zoom = MountainMapMarkers.constants[id].ZOOM || MountainMapMarkers.constants.ZOOM;
 
         //debug
         // console.log("regionUpdate", id, $scope.map);        
     }
-
 }]);
 
 

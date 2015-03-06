@@ -10,4 +10,8 @@ cmr.controller('NavigationController', ['$scope', '$location', function($scope, 
 		$scope.isMobileMenuOpen = !$scope.isMobileMenuOpen;
 	}
 
+	$scope.closeMobileMenu = function() {
+		$scope.isMobileMenuOpen = false;	
+	}
+
 }]);

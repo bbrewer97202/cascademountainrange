@@ -3,16 +3,26 @@
  ******************************************************************************/
 .SiteHeader {
     box-shadow: 0 3px 6px -1px rgba(36, 36, 33, 0.4);
-    background: $colorHeaderBackground;
-    background: radial-gradient(lighten($colorHeaderBackground, 2%), darken($colorHeaderBackground, 6%));
+    @include breakpoint($desktopBreakpoint) {
+        background: $colorHeaderBackground;    
+        background: radial-gradient(lighten($colorHeaderBackground, 2%), darken($colorHeaderBackground, 6%));
+    }
 }
 
 .SiteHeader-homelink {
     margin: 0;
     font-size: 1.3em;
     color: $colorLabel;
+    background: radial-gradient(lighten($colorHeaderBackground, 2%), darken($colorHeaderBackground, 6%));
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
     @include breakpoint($desktopBreakpoint) {
+        position: static;
         font-size: 2em;
+        background: transparent;
     }        
 
     a {
