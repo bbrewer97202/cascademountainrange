@@ -1,5 +1,7 @@
 <article class="MountainDetail">
 
+    <cmr-breadcrumb data="breadcrumb"></cmr-breadcrumb>
+
     <section class="MountainInfo">
         <h1 class="MountainInfo-name">{{mountain.name}}</h1>
         <p>Location: {{region}}</p>
@@ -16,9 +18,6 @@
     </section>
 
     <div class="MountainDetailMap">
-
-        <cmr-breadcrumb data="breadcrumb"></cmr-breadcrumb>
-
         <ui-gmap-google-map 
             center="map.center"
             zoom="map.zoom"

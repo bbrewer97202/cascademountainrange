@@ -913,6 +913,16 @@ a {
 /*******************************************************************************
  * mountain detail
  ******************************************************************************/
+.MountainDetail {
+  width: 85%;
+  margin: 0 auto;
+}
+@media (min-width: 37.5em) {
+  .MountainDetail {
+    width: 100%;
+  }
+}
+
 /* info */
 @media (min-width: 37.5em) {
   .MountainInfo {
@@ -951,12 +961,19 @@ a {
 
 /* photo */
 .Breadcrumb {
-  padding: 0.6rem;
+  padding: 1.5rem 0;
   font-size: 70%;
 }
 @media (min-width: 37.5em) {
   .Breadcrumb {
-    padding: 0 0 1rem 0;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 50%;
+    float: left;
+    padding-left: 0.83333%;
+    padding-right: 0.83333%;
+    padding: 0 0 1.5rem 0.6rem;
   }
 }
 

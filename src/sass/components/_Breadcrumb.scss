@@ -1,7 +1,8 @@
 .Breadcrumb {
-    padding: 0.6rem;
+    padding: 1.5rem 0;
     font-size: 70%;
     @include susy-breakpoint($desktopBreakpoint, $susy) {
-        padding: 0 0 1rem 0;
+		@include span(6);        	
+        padding: 0 0 1.5rem 0.6rem;
     }    
 }
