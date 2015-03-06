@@ -34,7 +34,9 @@ cmr.config(['uiGmapGoogleMapApiProvider', '$routeProvider', function(GoogleMapAp
 
 
 
-cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountains', function($scope, $routeParams, Mountains) {
+cmr.controller('MountainDetailController', 
+    ['$scope', '$routeParams', 'Mountains', 'uiGmapGoogleMapApi', 
+    function($scope, $routeParams, Mountains, GoogleMapApi) {
 
     $scope.breadcrumb = {
         regionName: '',
@@ -57,38 +59,31 @@ cmr.controller('MountainDetailController', ['$scope', '$routeParams', 'Mountains
             mountainName: data.name
         }
 
-        // $scope.map = {
-        //     center: {
-        //         latitude: $scope.mountain.lat,
-        //         longitude: $scope.mountain.lon
-        //     },
-        //     zoom: 11,
-        //     options: {
-        //         mapTypeId: google.maps.MapTypeId.TERRAIN 
-        //     }
-        // }
+        //map init
+        GoogleMapApi.then(function(maps) {
+
+            $scope.googleVersion = maps.version;
+            maps.visualRefresh = true;
+
+            $scope.map = {
+                center: {
+                    latitude: $scope.mountain.lat,
+                    longitude: $scope.mountain.lon
+                },
+                zoom: 11,                
+                options: {
+                    mapTypeId: google.maps.MapTypeId.TERRAIN,
+                    streetViewControl: false,
+                    disableDefaultUI: true,
+                    scrollwheel: false,
+                    zoomControl: true,
+                    zoomControlOptions: {
+                       style: google.maps.ZoomControlStyle.SMALL
+                    }        
+                }
+            };
+        });
     });
-
-    //default map
-    //TODO: do not render map (with default data), wait to render until real data has arrived
-    $scope.map = {
-        center: {
-            latitude: 45,
-            longitude: -73
-        },
-        zoom: 11
-    };
-
-    //TODO: make service or filter
-    //TODO: only used by breadcrumb? move to breadcrumb directive
-    // $scope.stateFormat = function() {
-    //     if ($scope.mountain.state) {
-    //        return Mountains.getRegionNameById($scope.mountain.state); 
-    //     } else {
-    //         return '';
-    //     }
-    // }
-
 }]);
 
 cmr.controller('MountainListController', 
@@ -319,7 +314,6 @@ cmr.controller('NavigationController', ['$scope', '$location', function($scope, 
 	}
 
 	$scope.openMenu = function() {
-		console.log("openMenu");
 		$scope.isMobileMenuOpen = !$scope.isMobileMenuOpen;
 	}
 
@@ -539,19 +533,19 @@ cmr.directive('cmrPhoto', function() {
         replace: 'true',
         link: function(scope, element, attrs) {
 
-            scope.PATH = '';
+            //scope.PATH = 'https://s3-us-west-2.amazonaws.com/cascademountainrange/';
 
             //default values are empty
-            scope.image = null;
+            scope.src = null;
             scope.caption = null;
-            scope.credit = null;
+            scope.url = null;
 
             //photo atttribute comes in async so not populated when directive loads, but updated later
             scope.$watch('photo', function(newVal) {
                 if (newVal) {                     
-                    scope.image = scope.PATH + newVal.photo;
-                    scope.caption = newVal.caption;
-                    scope.credit = newVal.credit;
+                    scope.src = newVal.photo;
+                    scope.caption = newVal.source;
+                    scope.url = newVal.url;
                 }
             }, true);
         },

@@ -1,5 +1,6 @@
-<div class="cmrPhoto" ng-show="image">
-    <img src="{{image}}" alt="" />
-    <div ng-show="caption" class="cmrPhoto-caption">{{caption}}</div>
-    <div ng-show="credit" class="cmrPhoto-credit">{{credit}}</div>
+<div class="cmrPhoto" ng-show="src">
+    <a ng-href="{{src}}" target="_blank"><img ng-src="{{src}}" alt="" /></a>
+    <span ng-show="caption" class="cmrPhoto-caption">
+    	<a ng-href="{{url}}" target="_blank">{{caption}}</a>
+    </span>
 </div>

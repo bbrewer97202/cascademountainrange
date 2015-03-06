@@ -7,7 +7,6 @@ cmr.controller('NavigationController', ['$scope', '$location', function($scope, 
 	}
 
 	$scope.openMenu = function() {
-		console.log("openMenu");
 		$scope.isMobileMenuOpen = !$scope.isMobileMenuOpen;
 	}
 

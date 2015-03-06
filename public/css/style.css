@@ -913,15 +913,6 @@ a {
 /*******************************************************************************
  * mountain detail
  ******************************************************************************/
-.MountainDetail {
-  padding: 0.6em;
-}
-@media (min-width: 37.5em) {
-  .MountainDetail {
-    padding: 1em;
-  }
-}
-
 /* info */
 @media (min-width: 37.5em) {
   .MountainInfo {
@@ -929,7 +920,7 @@ a {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 50%;
-    float: left;
+    float: right;
     padding-left: 0.83333%;
     padding-right: 0.83333%;
   }
@@ -947,8 +938,8 @@ a {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    width: 50%;
-    float: right;
+    width: 41.66667%;
+    float: left;
     padding-left: 0.83333%;
     padding-right: 0.83333%;
   }
@@ -959,38 +950,21 @@ a {
 }
 
 /* photo */
-@media (min-width: 37.5em) {
-  .MountainPhotos {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 50%;
-    float: left;
-    padding-left: 0.83333%;
-    padding-right: 0.83333%;
-  }
-}
-
 .Breadcrumb {
   padding: 0.6rem;
   font-size: 70%;
 }
 @media (min-width: 37.5em) {
   .Breadcrumb {
-    padding: 0 2rem;
+    padding: 0 0 1rem 0;
   }
-}
-.Breadcrumb a {
-  color: #333;
 }
 
 /*******************************************************************************
  * CMR PHOTO
  ******************************************************************************/
 .cmrPhoto {
-  width: 30%;
-  border: solid 4px #6d5536;
-  margin: 0 0 20px 0;
+  margin-bottom: 1.2em;
 }
 
 .cmrPhoto img {
@@ -998,14 +972,14 @@ a {
   display: block;
 }
 
-.cmrPhoto-caption,
-.cmrPhoto-credit {
-  padding: 0.3em;
-  color: #e6dc4b;
-  background-color: #6d5536;
-  /* #58291a; */
-}
-
-.cmrPhoto-credit {
-  font-size: 80%;
+.cmrPhoto-caption {
+  font-size: 60%;
+  line-height: 110%;
+  color: #666;
+  padding: 0;
+  margin: 0;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
 }
