@@ -8,19 +8,19 @@ cmr.directive('cmrPhoto', function() {
         replace: 'true',
         link: function(scope, element, attrs) {
 
-            scope.PATH = 'https://s3-us-west-2.amazonaws.com/cascademountainrange/';
+            //scope.PATH = 'https://s3-us-west-2.amazonaws.com/cascademountainrange/';
 
             //default values are empty
-            scope.image = null;
+            scope.src = null;
             scope.caption = null;
-            scope.credit = null;
+            scope.url = null;
 
             //photo atttribute comes in async so not populated when directive loads, but updated later
             scope.$watch('photo', function(newVal) {
                 if (newVal) {                     
-                    scope.image = scope.PATH + newVal.photo;
-                    scope.caption = newVal.caption;
-                    scope.credit = newVal.credit;
+                    scope.src = newVal.photo;
+                    scope.caption = newVal.source;
+                    scope.url = newVal.url;
                 }
             }, true);
         },

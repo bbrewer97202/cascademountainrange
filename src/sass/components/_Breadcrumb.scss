@@ -2,9 +2,6 @@
     padding: 0.6rem;
     font-size: 70%;
     @include susy-breakpoint($desktopBreakpoint, $susy) {
-        padding: 0 2rem;        
+        padding: 0 0 1rem 0;
     }    
-    a {
-    	color: #333;
-    }
 }

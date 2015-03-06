@@ -1,17 +1,12 @@
 /*******************************************************************************
  * mountain detail
  ******************************************************************************/
-.MountainDetail {
-    padding: 0.6em;
-    @include susy-breakpoint($desktopBreakpoint, $susy) {
-        padding: 1em;        
-    }
-} 
+.MountainDetail {} 
 
 /* info */
 .MountainInfo {
     @include susy-breakpoint($desktopBreakpoint, $susy) {
-        @include span(6 of 12);    
+        @include span(last 6 of 12);    
     }
 }
 
@@ -24,7 +19,7 @@
 /* map */
 .MountainDetailMap {
     @include susy-breakpoint($desktopBreakpoint, $susy) {
-        @include span(last 6 of 12);    
+        @include span(5 of 12);    
     }
 
 	.angular-google-map-container {
@@ -35,8 +30,4 @@
 }
 
 /* photo */
-.MountainPhotos {
-    @include susy-breakpoint($desktopBreakpoint, $susy) {
-        @include span(6 of 12);    
-    }
-}
+.MountainPhotos {}
