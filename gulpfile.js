@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    autoprefixer = require('gulp-autoprefixer'),
     concat = require('gulp-concat'),
     compass = require('gulp-compass'),
     uglify = require('gulp-uglify');
@@ -13,6 +14,15 @@ gulp.task('compass', function() {
         .on('error', function() {
             console.log("sass error TODO");
         })
+        .pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('autoprefixer', function() {
+    return gulp.src('./public/css/*.css')
+        .pipe(autoprefixer({
+            browsers: ['last 3 versions'],
+            cascade: false
+        }))
         .pipe(gulp.dest('./public/css'));
 });
 
@@ -49,4 +59,4 @@ gulp.task('watch', function() {
 });
 
 //default task
-gulp.task('default', ['scripts-vendor', 'scripts', 'compass', 'watch']);
+gulp.task('default', ['scripts-vendor', 'scripts', 'compass', 'autoprefixer', 'watch']);

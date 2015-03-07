@@ -189,7 +189,6 @@ figure {
  * Address differences between Firefox and other browsers.
  */
 hr {
-  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
@@ -330,8 +329,6 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
   /* 2 */
   box-sizing: content-box;
 }
@@ -547,6 +544,7 @@ a {
   top: 0.6em;
   width: 2em;
   height: 2em;
+  padding: 0 0 2.5rem 3rem;
   background-color: transparent;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -652,8 +650,6 @@ a {
 }
 @media (min-width: 37.5em) {
   .HomepageIntro {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 50%;
     float: left;
@@ -678,8 +674,6 @@ a {
 }
 @media (min-width: 37.5em) {
   .HomepageImagery {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 41.66667%;
     float: right;
@@ -703,6 +697,7 @@ a {
   word-break: break-word;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
+  -ms-hyphens: auto;
   hyphens: auto;
 }
 
@@ -759,8 +754,6 @@ a {
  ******************************************************************************/
 @media (min-width: 37.5em) {
   .MountainList {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 50%;
     float: right;
@@ -840,6 +833,9 @@ a {
   cursor: pointer;
   font-size: 90%;
   font-weight: normal;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   color: #FDF0F0;
   padding: 0.5em;
@@ -883,6 +879,9 @@ a {
 
 .MountainListTable a {
   color: #333;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
   text-decoration: none;
 }
@@ -895,8 +894,6 @@ a {
 }
 @media (min-width: 37.5em) {
   .mountainListMap {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 41.66667%;
     float: left;
@@ -964,8 +961,6 @@ a {
 /* info */
 @media (min-width: 37.5em) {
   .MountainInfo {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 50%;
     float: right;
@@ -983,8 +978,6 @@ a {
 /* map */
 @media (min-width: 37.5em) {
   .MountainDetailMap {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 41.66667%;
     float: left;
@@ -1004,8 +997,6 @@ a {
 }
 @media (min-width: 37.5em) {
   .Breadcrumb {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 50%;
     float: left;
@@ -1036,5 +1027,6 @@ a {
   word-break: break-word;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
+  -ms-hyphens: auto;
   hyphens: auto;
 }
